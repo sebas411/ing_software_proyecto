@@ -333,7 +333,7 @@ class Registros extends React.Component {
       </div>
       </div>
       
-      
+       
       
     );
   }
