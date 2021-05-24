@@ -5,8 +5,11 @@ import "./style.css"
 
 const HomePage = () => {
 
-    return (<>
-    </>)
+    return (
+    <div>
+        HOLI
+
+    </div>)
 }
 
 export default HomePage
