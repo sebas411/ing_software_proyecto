@@ -1,7 +1,7 @@
 import React from "react";
 import "./Registros.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Navbar from "../../components/navbar/Navbar"
+import Navbar from '../../components/Navbar'
 import {
   Table,
   Button,
