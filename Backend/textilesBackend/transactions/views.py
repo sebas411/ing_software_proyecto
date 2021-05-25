@@ -1,18 +1,17 @@
 from django.shortcuts import render
-from rest_framework import viewsets
-from rest_framework import permissions
-from transactions.serializers import TransactionSerializer , EmployeeSerializer
-
-class TransactionViewSet(viewsets.ModelViewSet):
-    
-    queryset = Transactions.objects.all()
-    serializer_class = TransactionSerializer
-    permission_classes = [permissions.AllowAny]
-
-class EmployeeViewSet(viewsets.ModelViewSet):
-    
-    queryset = Employee.objects.all()
-    serializer_class = EmployeeSerializer
-    permission_classes = [permissions.AllowAny]
 
 
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from django.http import JsonResponse
+
+from .serializers import TransactionSerializer 
+from .models import Transaction
+
+
+
+@api_view(['GET'])
+def transactionList(request):
+	transactions= Transaction.objects.all()
+	serializer = TransactionSerializer(transactions, many=True)
+	return Response(serializer.data)
