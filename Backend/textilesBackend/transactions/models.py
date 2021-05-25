@@ -9,6 +9,8 @@ class Employee(models.Model):
 	first_name = models.CharField(max_length=50)
 	last_name = models.CharField(max_length=50)
 	hire_date = models.DateField()
+	class Meta:
+            db_table = 'employees'
 
 	
 class Transaction(models.Model):
@@ -19,4 +21,5 @@ class Transaction(models.Model):
 	title = models.CharField(max_length=50)
 	details = models.CharField(max_length=300)
 	employee_ID = models.ForeignKey(Employee,on_delete=models.CASCADE)
-
+	class Meta:
+            db_table = 'transactions'
