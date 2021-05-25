@@ -117,7 +117,7 @@ class Registros extends React.Component {
       <>
         <Container>
         <br />
-          <Button color="success" onClick={()=>this.mostrarModalInsertar()}>Crear</Button>
+          <Button color="success" onClick={()=>this.mostrarModalInsertar()}>Ingresar registro</Button>
           <br />
           <br />
           <Table>

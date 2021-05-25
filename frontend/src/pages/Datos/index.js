@@ -32,11 +32,11 @@ function createData(id, nombre, tipo, cantidad, fecha) {
 }
 
 const rows = [
-  createData(1, 'Nombre de la transacción', 'Tipo de transacción', 'Cantidad de transacción', 'Fecha realizada'),
-  createData(2, 'Nombre de la transacción', 'Tipo de transacción', 'Cantidad de transacción', 'Fecha realizada'),
-  createData(3, 'Nombre de la transacción', 'Tipo de transacción', 'Cantidad de transacción', 'Fecha realizada'),
-  createData(4, 'Nombre de la transacción', 'Tipo de transacción', 'Cantidad de transacción', 'Fecha realizada'),
-  createData(5, 'Nombre de la transacción', 'Tipo de transacción', 'Cantidad de transacción', 'Fecha realizada'),
+  createData(1, 'Venta de 10 metros cuadrados', 'Ingreso', '1200', '18-05-2021'),
+  createData(2, 'Venta de 1.5 metros cuadrados', 'Ingreso', '200', '21-05-2021'),
+  createData(3, 'Factura de luz', 'Gasto', '5030', '22-05-2021'),
+  createData(4, 'Factura de agua', 'Gasto', '2300', '22-05-2021'),
+  createData(5, 'Venta de 35 metros cuadrados', 'Ingreso', '3050', '23-05-2021'),
 ];
 
 const useStyles = makeStyles({
@@ -55,7 +55,7 @@ export default function DataTable() {
         <TableHead>
           <TableRow>
             <StyledTableCell>id</StyledTableCell>
-            <StyledTableCell align="right">Nombre</StyledTableCell>
+            <StyledTableCell align="center">Nombre</StyledTableCell>
             <StyledTableCell align="right">Tipo</StyledTableCell>
             <StyledTableCell align="right">Cantidad</StyledTableCell>
             <StyledTableCell align="right">Fecha</StyledTableCell>
@@ -67,7 +67,7 @@ export default function DataTable() {
               <StyledTableCell component="th" scope="row">
                 {row.id}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.nombre}</StyledTableCell>
+              <StyledTableCell align="center">{row.nombre}</StyledTableCell>
               <StyledTableCell align="right">{row.tipo}</StyledTableCell>
               <StyledTableCell align="right">{row.cantidad}</StyledTableCell>
               <StyledTableCell align="right">{row.fecha}</StyledTableCell>
