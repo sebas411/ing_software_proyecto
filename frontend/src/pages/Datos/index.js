@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Navbar from '../../components/Navbar';
+import axios from 'axios'
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -27,6 +28,7 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
+/*
 function createData(id, nombre, tipo, cantidad, fecha) {
   return { id, nombre, tipo, cantidad, fecha };
 }
@@ -38,6 +40,7 @@ const rows = [
   createData(4, 'Factura de agua', 'Gasto', '2300', '22-05-2021'),
   createData(5, 'Venta de 35 metros cuadrados', 'Ingreso', '3050', '23-05-2021'),
 ];
+*/
 
 const useStyles = makeStyles({
   table: {
@@ -47,9 +50,16 @@ const useStyles = makeStyles({
 
 export default function DataTable() {
   const classes = useStyles();
+  const [rows, setRows] = useState([])
 
+  useEffect(() => {
+    axios.get('localhost:8000/transactions').then(res => {
+      setRows(res.data)
+      console.log('res ===', res)
+    })
+  })
   return (<>
-      <Navbar />
+    <Navbar />
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
