@@ -26,10 +26,12 @@ const HomePage = () => {
         setState({ ...state, [e.target.name]: e.target.value })
     }
 
+    const { push } = useHistory()
+
     return (
         <Container>
             <div className="login-wrapper">
-                <h1>BIENVENIDOS</h1>
+                <h1>Textiles La Roca S.A.</h1>
                 <label>
                     <p>Usuario</p>
                     <input type="text" name="username" value={state.username} onChange={handleChange} />
@@ -38,10 +40,9 @@ const HomePage = () => {
                     <p>Contraseña</p>
                     <input type="password" name="password" value={state.password} onChange={handleChange} />
                 </label>
-
-                <Button variant='Ingresar' onClick={handleLogin}>
-                    Ingresar
-                </Button>
+                    <Button variant='Ingresar' onClick={() => push('./registros')} >
+                     Ingresar
+                     </Button>
             </div>
         </Container>
     );
