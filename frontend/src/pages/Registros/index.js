@@ -15,8 +15,10 @@ import {
 } from "reactstrap";
 
 const Registro = [
-  { id: "", Nombre: "", tipo: "", cantidad: "", Fecha: "" },
+  { id: "", creation_date: "", confirmed: "", amount: "", title: "",details :"" },
 ];
+
+const apiURL= 'http://127.0.0.1:8000/transactions/' ;
 
 class Registros extends React.Component {
   state = {
@@ -26,10 +28,11 @@ class Registros extends React.Component {
     transactions: [],
     form: {
       id: "",
-      Nombre: "",
-      tipo: "",
-      cantidad: "",
-      Fecha: ""
+      creation_date: "",
+      confirmed: "",
+      amount: "",
+      title: "",
+      details:""
     },
   };
 
@@ -38,13 +41,22 @@ class Registros extends React.Component {
   }
 
   getAllTransactions() {
-    axios.get('localhost:8000/transactions').then(res => {
+    console.log('Im trying to fetch');
+    axios.get(apiURL).then(res => {
       this.setState({ ...this.state, transactions: res.data })
       console.log('res ===', res)
     }, (error) => {
       console.log('There was a mistake here', error)
     })
   }
+  /*getAllTransactions() {
+    fetch('localhost:8000/transactions')
+    .then(response =>  response.json())
+    .then (data => console.log( 'Data' ,data)
+      )
+    this.setState({ ...this.state, transactions: response.data });
+      
+  }*/
 
   mostrarModalActualizar = (dato) => {
     this.setState({
@@ -72,16 +84,19 @@ class Registros extends React.Component {
   editar = (dato) => {
     var contador = 0;
     var arreglo = this.state.Registro;
+    console.log('trying to update');
+    console.log(dato);
     arreglo.forEach((registro) => {
       if (dato.id === registro.id) {
-        arreglo[contador].Nombre = dato.Nombre;
-        arreglo[contador].tipo = dato.tipo;
-        arreglo[contador].cantidad = dato.cantidad;
-        arreglo[contador].Fecha = dato.Fecha;
+        arreglo[contador].title = dato.title;
+        arreglo[contador].details = dato.details;
+        arreglo[contador].amount = dato.amount;
+        arreglo[contador].creation_date = dato.creation_date;
       }
+
       contador++;
     });
-    axios.put(`/transactions/update/${dato.id}`, this.state.form).then(res => {
+    axios.post(apiURL+`update/${dato.id}`, this.state.form).then(res => {
       console.log('update succesfully')
       this.getAllTransactions();
     })
@@ -100,7 +115,7 @@ class Registros extends React.Component {
         }
         contador++;
       });
-      axios.delete(`/transactions/delete${dato.id}`).then(res => {
+      axios.delete(apiURL+`delete/${dato.id}`).then(res => {
         console.log('item deleted')
         this.getAllTransactions()
       })
@@ -150,8 +165,8 @@ class Registros extends React.Component {
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Nombre</th>
-                    <th>tipo</th>
+                    <th>Titulo</th>
+                    <th>Detalles</th>
                     <th>cantidad</th>
                     <th>Fecha</th>
                   </tr>
@@ -161,10 +176,10 @@ class Registros extends React.Component {
                   {this.state.transactions.map((dato) => (
                     <tr key={dato.id_cancion}>
                       <td>{dato.id}</td>
-                      <td>{dato.Nombre}</td>
-                      <td>{dato.tipo}</td>
-                      <td>{dato.cantidad}</td>
-                      <td>{dato.Fecha}</td>
+                      <td>{dato.title}</td>
+                      <td>{dato.details}</td>
+                      <td>{dato.amount}</td>
+                      <td>{dato.creation_date}</td>
                       <td>
                         <Button
                           color="primary"
@@ -201,27 +216,27 @@ class Registros extends React.Component {
 
                 <FormGroup>
                   <label>
-                    Nombre:
+                    Titulo:
                   </label>
                   <input
                     className="form-control"
-                    name="Nombre"
+                    name="title"
                     type="text"
                     onChange={this.handleChange}
-                    value={this.state.form.Nombre}
+                    value={this.state.form.title}
                   />
                 </FormGroup>
 
                 <FormGroup>
                   <label>
-                    tipo:
+                    Detalles:
                   </label>
                   <input
                     className="form-control"
-                    name="tipo"
+                    name="details"
                     type="text"
                     onChange={this.handleChange}
-                    value={this.state.form.tipo}
+                    value={this.state.form.details}
                   />
                 </FormGroup>
 
@@ -231,10 +246,10 @@ class Registros extends React.Component {
                   </label>
                   <input
                     className="form-control"
-                    name="cantidad"
+                    name="amount"
                     type="text"
                     onChange={this.handleChange}
-                    value={this.state.form.cantidad}
+                    value={this.state.form.amount}
                   />
                 </FormGroup>
 
@@ -244,10 +259,10 @@ class Registros extends React.Component {
                   </label>
                   <input
                     className="form-control"
-                    name="Fecha"
+                    name="creation_date"
                     type="text"
                     onChange={this.handleChange}
-                    value={this.state.form.Año}
+                    value={this.state.form.creation_date}
                   />
                 </FormGroup>
               </ModalBody>

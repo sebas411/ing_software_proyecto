@@ -13,9 +13,10 @@ const HomePage = () => {
     const [state, setState] = useState({ username: '', password: '' })
     //const { push } = useHistory()
 
+    const apiURL= 'http://127.0.0.1:8000/transactions/';
     const handleLogin =async  () => {
         try {
-            await axios.post('/login', state)
+            await axios.post(apiURL+'/login', state)
             console.log('login successfully')
         } catch(err) {
             console.log('login failed')

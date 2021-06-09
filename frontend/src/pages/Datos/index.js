@@ -48,16 +48,23 @@ const useStyles = makeStyles({
   },
 });
 
+
+const apiURL= 'http://127.0.0.1:8000/transactions/' ;
+
 export default function DataTable() {
   const classes = useStyles();
   const [rows, setRows] = useState([])
 
   useEffect(() => {
-    axios.get('localhost:8000/transactions').then(res => {
+    axios.get(apiURL).then(res => {
       setRows(res.data)
       console.log('res ===', res)
     })
   })
+  /*axios.get(apiURL).then(res => {
+      setRows(res.data)
+      console.log('res ===', res)
+    })*/
   return (<>
     <Navbar />
     <TableContainer component={Paper}>
@@ -65,8 +72,8 @@ export default function DataTable() {
         <TableHead>
           <TableRow>
             <StyledTableCell>id</StyledTableCell>
-            <StyledTableCell align="center">Nombre</StyledTableCell>
-            <StyledTableCell align="right">Tipo</StyledTableCell>
+            <StyledTableCell align="center">Titulo</StyledTableCell>
+            <StyledTableCell align="right">Detalles</StyledTableCell>
             <StyledTableCell align="right">Cantidad</StyledTableCell>
             <StyledTableCell align="right">Fecha</StyledTableCell>
           </TableRow>
@@ -77,10 +84,10 @@ export default function DataTable() {
               <StyledTableCell component="th" scope="row">
                 {row.id}
               </StyledTableCell>
-              <StyledTableCell align="center">{row.nombre}</StyledTableCell>
-              <StyledTableCell align="right">{row.tipo}</StyledTableCell>
-              <StyledTableCell align="right">{row.cantidad}</StyledTableCell>
-              <StyledTableCell align="right">{row.fecha}</StyledTableCell>
+              <StyledTableCell align="center">{row.title}</StyledTableCell>
+              <StyledTableCell align="right">{row.details}</StyledTableCell>
+              <StyledTableCell align="right">{row.amount}</StyledTableCell>
+              <StyledTableCell align="right">{row.creation_date}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
