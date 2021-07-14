@@ -60,7 +60,7 @@ export default function DataTable() {
       setRows(res.data)
       console.log('res ===', res)
     })
-  })
+  }, [] )
   /*axios.get(apiURL).then(res => {
       setRows(res.data)
       console.log('res ===', res)
