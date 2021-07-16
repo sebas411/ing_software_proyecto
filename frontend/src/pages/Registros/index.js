@@ -29,7 +29,7 @@ class Registros extends React.Component {
     form: {
       id: "",
       creation_date: "",
-      confirmed: "",
+      confirmed: "false",
       amount: "",
       title: "",
       details:""
@@ -41,10 +41,10 @@ class Registros extends React.Component {
   }
 
   getAllTransactions() {
-    console.log('Im trying to fetch');
+    //console.log('Im trying to fetch');
     axios.get(apiURL).then(res => {
       this.setState({ ...this.state, transactions: res.data })
-      console.log('res ===', res)
+      //console.log('response :', res)
     }, (error) => {
       console.log('There was a mistake here', error)
     })
@@ -129,8 +129,9 @@ class Registros extends React.Component {
     var valorNuevo = { ...this.state.form };
     valorNuevo.id = this.state.Registro.length + 1;
     var lista = this.state.Registro;
-    axios.post("/transactions/create", this.state.form).then(res => {
-      console.log('saved successfully')
+    axios.post(apiURL+"create/", this.state.form).then(res => {
+      console.log('INSERT : ')
+      console.log(valorNuevo)
       // after creating a transaction, we also need to fetch all transactions, so that our new transaction
       // would be visible in the front-end
       this.getAllTransactions(); // this will re-fetch tall the transactions
@@ -174,7 +175,7 @@ class Registros extends React.Component {
 
                 <tbody>
                   {this.state.transactions.map((dato) => (
-                    <tr key={dato.id_cancion}>
+                    <tr key={dato.id}>
                       <td>{dato.id}</td>
                       <td>{dato.title}</td>
                       <td>{dato.details}</td>
@@ -257,13 +258,15 @@ class Registros extends React.Component {
                   <label>
                     Fecha:
                   </label>
-                  <input
-                    className="form-control"
-                    name="creation_date"
-                    type="text"
-                    onChange={this.handleChange}
-                    value={this.state.form.creation_date}
+                  <input 
+                  className="form-control"
+                  type="date" id="start" name="creation_date"
+                  min="2020-01-01" max="2021-12-31"
+                  onChange={this.handleChange}
+                  value={this.state.form.creation_date}
                   />
+                  
+                  
                 </FormGroup>
               </ModalBody>
 
@@ -291,20 +294,7 @@ class Registros extends React.Component {
               </ModalHeader>
 
               <ModalBody>
-                <FormGroup>
-                  <label>
-                    Id:
-                  </label>
-
-                  <input
-                    className="form-control"
-                    //readOnly
-                    name="id"
-                    type="text"
-                    //value={this.state.Registro.length+1}
-                    onChange={this.handleChange}
-                  />
-                </FormGroup>
+                
 
                 <FormGroup>
                   <label>
@@ -312,7 +302,7 @@ class Registros extends React.Component {
                   </label>
                   <input
                     className="form-control"
-                    name="Nombre"
+                    name="details"
                     type="text"
                     onChange={this.handleChange}
                   />
@@ -324,7 +314,7 @@ class Registros extends React.Component {
                   </label>
                   <input
                     className="form-control"
-                    name="tipo"
+                    name="title"
                     type="text"
                     onChange={this.handleChange}
                   />
@@ -336,7 +326,7 @@ class Registros extends React.Component {
                   </label>
                   <input
                     className="form-control"
-                    name="cantidad"
+                    name="amount"
                     type="text"
                     onChange={this.handleChange}
                   />
@@ -346,12 +336,14 @@ class Registros extends React.Component {
                   <label>
                     Fecha:
                   </label>
-                  <input
-                    className="form-control"
-                    name="Fecha"
-                    type="text"
-                    onChange={this.handleChange}
-                  />
+                  <input 
+                  className="form-control"
+                  type="date" id="start" name="creation_date"
+                  min="2020-01-01" max="2021-12-31"
+                  onChange={this.handleChange}
+                  >
+                  </input>
+
                 </FormGroup>
               </ModalBody>
 

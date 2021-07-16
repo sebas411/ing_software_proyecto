@@ -67,7 +67,29 @@ export default function DataTable() {
     })*/
   return (<>
     <Navbar />
+    <div styles="min-height:50px; display:flex; flex-direction: row; content-align : right; padding:15px">
+      FROM :
+      <div>
+      <input type="date" id="start" name="trip-start"
+       min="2020-01-01" max="2021-12-31">
+
+       </input>
+       </div>
+
+        TO :  
+
+        <div>
+       <input type="date" id="start" name="trip-start"
+       min="2020-01-01" max="2021-12-31">
+
+       </input>
+       </div>
+
+      </div>
     <TableContainer component={Paper}>
+      
+
+
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
