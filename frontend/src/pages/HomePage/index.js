@@ -35,15 +35,14 @@ const HomePage = () => {
                 <h1>Textiles La Roca S.A.</h1>
                 <label>
                     <p>Usuario</p>
-                    <input type="text" name="username" value={state.username} onChange={handleChange} />
+                    <input type="text" name="username" placeholder ="Ingresa tu usuario" />
                 </label>
                 <label>
                     <p>Contraseña</p>
-                    <input type="password" name="password" value={state.password} onChange={handleChange} />
+                    <input type="password" name="password" placeholder ="Ingresa tu contraseña" />
                 </label>
-                    <Button variant='Ingresar' onClick={() => push('./registros')} >
-                     Ingresar
-                     </Button>
+                    <button onClick={() => push('./registros')}>Ingresar</button>
+                     
             </div>
         </Container>
     );
