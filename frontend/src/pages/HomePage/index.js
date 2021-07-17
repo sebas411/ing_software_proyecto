@@ -16,7 +16,7 @@ const HomePage = () => {
     const apiURL= 'http://127.0.0.1:8000/transactions/';
     const handleLogin =async  () => {
         try {
-            await axios.post(apiURL+'/login', state)
+            await axios.post(apiURL+'/login/', state)
             console.log('login successfully')
         } catch(err) {
             console.log('login failed')

@@ -205,8 +205,8 @@ class Registros extends React.Component {
                       <td>{dato.id}</td>
                       <td>{dato.title}</td>
                       <td>{dato.details}</td>
-                      <td className={dato.title=="Venta"? "income" : "expense"}>
-                       {dato.title=="Venta"?dato.amount : (-1*dato.amount)}
+                      <td className={dato.title==="Venta"? "income" : "expense"}>
+                       {dato.title==="Venta"?dato.amount : (-1*dato.amount)}
                        </td>
                       <td className="check"> {dato.confirmed? "✓" : ""}</td>
                       
