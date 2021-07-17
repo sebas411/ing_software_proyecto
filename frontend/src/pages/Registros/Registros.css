@@ -65,3 +65,23 @@
   float: right;
    padding: 20px;
     }
+
+
+
+.income{
+  color: green;
+}
+
+.expense {
+  color: red;
+}
+
+.check {
+  text-align: center;
+  
+}
+
+.bold{
+  font-weight: bolder;
+  
+}

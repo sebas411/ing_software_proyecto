@@ -166,9 +166,10 @@ class Registros extends React.Component {
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Titulo</th>
+                    <th>Tipo</th>
                     <th>Detalles</th>
-                    <th>cantidad</th>
+                    <th>Cantidad</th>
+                    <th>Revisado</th>
                     <th>Fecha</th>
                   </tr>
                 </thead>
@@ -179,16 +180,18 @@ class Registros extends React.Component {
                       <td>{dato.id}</td>
                       <td>{dato.title}</td>
                       <td>{dato.details}</td>
-                      <td>{dato.amount}</td>
+                      <td className={dato.title=="Venta"? "income" : "expense"}> {dato.title=="Venta"?dato.amount : (-1*dato.amount)}</td>
+                      <td className="check"> {dato.confirmed? "✓" : ""}</td>
+                      
                       <td>{dato.creation_date}</td>
                       <td>
                         <Button
                           color="primary"
                           onClick={() => this.mostrarModalActualizar(dato)}
                         >
-                          Editar
+                          ✎
                         </Button>{" "}
-                        <Button color="danger" onClick={() => this.eliminar(dato)}>Eliminar</Button>
+                        <Button color="danger" onClick={() => this.eliminar(dato)}> X </Button>
                       </td>
                     </tr>
                   ))}
@@ -198,38 +201,26 @@ class Registros extends React.Component {
 
             <Modal isOpen={this.state.modalActualizar}>
               <ModalHeader>
-                <div><h3>Editar Registro</h3></div>
+                <div><h3>Editar Registro   {this.state.form.id} </h3></div>
               </ModalHeader>
 
               <ModalBody>
-                <FormGroup>
-                  <label>
-                    Id:
-                  </label>
+                
 
-                  <input
-                    className="form-control"
-                    readOnly
-                    type="text"
-                    value={this.state.form.id}
-                  />
+                <FormGroup>
+                  <label className="bold">
+                    Tipo:
+                  </label>
+                  <div>
+                    <input type="radio" id="Venta" value="Venta" name="title" onChange={this.handleChange}/> 
+                    Venta <br/>
+                    <input type="radio" id="Gasto" value="Gasto" name="title" onChange={this.handleChange}/>
+                    Gasto
+                  </div>
                 </FormGroup>
 
                 <FormGroup>
-                  <label>
-                    Titulo:
-                  </label>
-                  <input
-                    className="form-control"
-                    name="title"
-                    type="text"
-                    onChange={this.handleChange}
-                    value={this.state.form.title}
-                  />
-                </FormGroup>
-
-                <FormGroup>
-                  <label>
+                  <label className="bold">
                     Detalles:
                   </label>
                   <input
@@ -242,8 +233,8 @@ class Registros extends React.Component {
                 </FormGroup>
 
                 <FormGroup>
-                  <label>
-                    cantidad:
+                  <label className="bold">
+                    Cantidad:
                   </label>
                   <input
                     className="form-control"
@@ -255,7 +246,7 @@ class Registros extends React.Component {
                 </FormGroup>
 
                 <FormGroup>
-                  <label>
+                  <label className="bold">
                     Fecha:
                   </label>
                   <input 
@@ -294,11 +285,26 @@ class Registros extends React.Component {
               </ModalHeader>
 
               <ModalBody>
-                
+                <FormGroup>
+                  <label className="bold">
+                    Tipo:
+                  </label>
+                 
+
+                  <div>
+                    <input type="radio" id="Venta" value="Venta" name="title" onChange={this.handleChange}/> 
+                    Venta <br/>
+                    <input type="radio" id="Gasto" value="Gasto" name="title" onChange={this.handleChange}/>
+                    Gasto
+                  </div>
+                  <br/>
+
+                </FormGroup>
+
 
                 <FormGroup>
-                  <label>
-                    Nombre:
+                  <label className="bold">
+                    Titulo:
                   </label>
                   <input
                     className="form-control"
@@ -308,21 +314,11 @@ class Registros extends React.Component {
                   />
                 </FormGroup>
 
-                <FormGroup>
-                  <label>
-                    tipo:
-                  </label>
-                  <input
-                    className="form-control"
-                    name="title"
-                    type="text"
-                    onChange={this.handleChange}
-                  />
-                </FormGroup>
+                
 
                 <FormGroup>
-                  <label>
-                    cantidad:
+                  <label className="bold">
+                    Cantidad:
                   </label>
                   <input
                     className="form-control"
@@ -333,7 +329,7 @@ class Registros extends React.Component {
                 </FormGroup>
 
                 <FormGroup>
-                  <label>
+                  <label className="bold">
                     Fecha:
                   </label>
                   <input 

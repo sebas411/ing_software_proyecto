@@ -67,7 +67,8 @@ export default function DataTable() {
     })*/
   return (<>
     <Navbar />
-    <div styles="min-height:50px; display:flex; flex-direction: row; content-align : right; padding:15px">
+    <div styles="min-height:50px; display:flex; flex-direction: row; content-align : right; padding:15px margin: 50px">
+    
       FROM :
       <div>
       <input type="date" id="start" name="trip-start"
@@ -94,8 +95,8 @@ export default function DataTable() {
         <TableHead>
           <TableRow>
             <StyledTableCell>id</StyledTableCell>
-            <StyledTableCell align="center">Titulo</StyledTableCell>
-            <StyledTableCell align="right">Detalles</StyledTableCell>
+            <StyledTableCell align="center">Tipo</StyledTableCell>
+            <StyledTableCell align="right">Titulo</StyledTableCell>
             <StyledTableCell align="right">Cantidad</StyledTableCell>
             <StyledTableCell align="right">Fecha</StyledTableCell>
           </TableRow>
@@ -108,7 +109,8 @@ export default function DataTable() {
               </StyledTableCell>
               <StyledTableCell align="center">{row.title}</StyledTableCell>
               <StyledTableCell align="right">{row.details}</StyledTableCell>
-              <StyledTableCell align="right">{row.amount}</StyledTableCell>
+                 
+              <StyledTableCell align="right" className={row.title=="Venta"? "income" : "expense"}>{row.title=="Venta"?row.amount : (-1*row.amount)}</StyledTableCell>
               <StyledTableCell align="right">{row.creation_date}</StyledTableCell>
             </StyledTableRow>
           ))}
