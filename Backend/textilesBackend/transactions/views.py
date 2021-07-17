@@ -21,7 +21,7 @@ from django.contrib.auth.models import User
 
 @api_view(['GET'])
 def transactionList(request):
-	transactions= Transaction.objects.all()
+	transactions= Transaction.objects.all().order_by('-creation_date')
 	serializer = TransactionSerializer(transactions, many=True)
 	return Response(serializer.data)
 

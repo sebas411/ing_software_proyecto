@@ -157,10 +157,35 @@ class Registros extends React.Component {
         <div className="table-responsive">
           <>
             <Container>
-              <br />
-              <Button color="success" onClick={() => this.mostrarModalInsertar()}>Ingresar registro</Button>
-              <br />
-              <br />
+              
+              <div className="date-picker-container">
+                    <div className="refresh">{"⟳"}</div>
+
+                    <div className="date-picker">    
+                    FROM :
+                    <div>
+                    <input type="date" id="start" name="date-start"
+                     min="2020-01-01" max="2021-12-31">
+
+                     </input>
+                     </div>
+
+                      TO :  
+
+                      <div>
+                     <input type="date" id="end" name="date-start"
+                     min="2020-01-01" max="2021-12-31">
+                     </input>
+                     </div>
+                     </div>
+
+                    <div style={{display: "flex", "flex-direction" : "row",width : "55%"}}>
+                    
+                     <Button color="success" onClick={() => this.mostrarModalInsertar()}>Ingresar registro</Button>
+                    </div>
+                     
+
+                    </div>
               <Table>
 
                 <thead>
@@ -180,7 +205,9 @@ class Registros extends React.Component {
                       <td>{dato.id}</td>
                       <td>{dato.title}</td>
                       <td>{dato.details}</td>
-                      <td className={dato.title=="Venta"? "income" : "expense"}> {dato.title=="Venta"?dato.amount : (-1*dato.amount)}</td>
+                      <td className={dato.title=="Venta"? "income" : "expense"}>
+                       {dato.title=="Venta"?dato.amount : (-1*dato.amount)}
+                       </td>
                       <td className="check"> {dato.confirmed? "✓" : ""}</td>
                       
                       <td>{dato.creation_date}</td>

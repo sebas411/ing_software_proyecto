@@ -9,6 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Navbar from '../../components/Navbar';
 import axios from 'axios'
+import "../Registros/Registros.css";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -67,11 +68,13 @@ export default function DataTable() {
     })*/
   return (<>
     <Navbar />
-    <div styles="min-height:50px; display:flex; flex-direction: row; content-align : right; padding:15px margin: 50px">
-    
+    <div className="date-picker-container">
+      <div className="refresh">{"⟳"}</div>
+
+      <div className="date-picker">    
       FROM :
       <div>
-      <input type="date" id="start" name="trip-start"
+      <input type="date" id="start" name="date-start"
        min="2020-01-01" max="2021-12-31">
 
        </input>
@@ -80,13 +83,17 @@ export default function DataTable() {
         TO :  
 
         <div>
-       <input type="date" id="start" name="trip-start"
+       <input type="date" id="end" name="date-start"
        min="2020-01-01" max="2021-12-31">
-
        </input>
        </div>
+       </div>
+
+       
 
       </div>
+    <div className="table-container">
+
     <TableContainer component={Paper}>
       
 
@@ -110,12 +117,19 @@ export default function DataTable() {
               <StyledTableCell align="center">{row.title}</StyledTableCell>
               <StyledTableCell align="right">{row.details}</StyledTableCell>
                  
-              <StyledTableCell align="right" className={row.title=="Venta"? "income" : "expense"}>{row.title=="Venta"?row.amount : (-1*row.amount)}</StyledTableCell>
+              <StyledTableCell  align="right" className={true? "income" : "expense"}>
+              {row.title=="Venta"?row.amount : (-1*row.amount)}
+              </StyledTableCell>
               <StyledTableCell align="right">{row.creation_date}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
+
+    </div>
+
+
+
   </>);
 }
