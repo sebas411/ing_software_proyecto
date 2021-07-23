@@ -37,6 +37,11 @@ const Navbar = () => {
                         </Button>
                         </Grid>
                         <Grid item>
+                        <Button variant='contained' onClick={() => push('./reportes')} color='primary'>
+                                Reportes
+                        </Button>
+                        </Grid>
+                        <Grid item>
                         <Button variant='contained' onClick={() => push('./')} color='primary'>
                                 Salir
                         </Button>

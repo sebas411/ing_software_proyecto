@@ -15,16 +15,17 @@ import {
 } from "reactstrap";
 
 const Registro = [
-  { id: "", creation_date: "", confirmed: "", amount: "", title: "",details :"" },
+  { id: "", creation_date: "", confirmed: "", amount: "", title: "", details: "" },
 ];
 
-const apiURL= 'http://127.0.0.1:8000/transactions/' ;
+const apiURL = 'http://127.0.0.1:8000/transactions/';
 
 class Registros extends React.Component {
   state = {
     Registro: Registro,
     modalActualizar: false,
     modalInsertar: false,
+    modalInsertars: false,
     transactions: [],
     form: {
       id: "",
@@ -32,7 +33,7 @@ class Registros extends React.Component {
       confirmed: "false",
       amount: "",
       title: "",
-      details:""
+      details: ""
     },
   };
 
@@ -73,12 +74,20 @@ class Registros extends React.Component {
     this.setState({
       modalInsertar: true,
     });
+  };
 
-
+  mostrarModalInsertars = () => {
+    this.setState({
+      modalInsertars: true,
+    });
   };
 
   cerrarModalInsertar = () => {
     this.setState({ modalInsertar: false });
+  };
+
+  cerrarModalInsertars = () => {
+    this.setState({ modalInsertars: false });
   };
 
   editar = (dato) => {
@@ -96,7 +105,7 @@ class Registros extends React.Component {
 
       contador++;
     });
-    axios.post(apiURL+`update/${dato.id}`, this.state.form).then(res => {
+    axios.post(apiURL + `update/${dato.id}`, this.state.form).then(res => {
       console.log('update succesfully')
       this.getAllTransactions();
     })
@@ -115,7 +124,7 @@ class Registros extends React.Component {
         }
         contador++;
       });
-      axios.delete(apiURL+`delete/${dato.id}`).then(res => {
+      axios.delete(apiURL + `delete/${dato.id}`).then(res => {
         console.log('item deleted')
         this.getAllTransactions()
       })
@@ -129,7 +138,7 @@ class Registros extends React.Component {
     var valorNuevo = { ...this.state.form };
     valorNuevo.id = this.state.Registro.length + 1;
     var lista = this.state.Registro;
-    axios.post(apiURL+"create/", this.state.form).then(res => {
+    axios.post(apiURL + "create/", this.state.form).then(res => {
       console.log('INSERT : ')
       console.log(valorNuevo)
       // after creating a transaction, we also need to fetch all transactions, so that our new transaction
@@ -157,35 +166,35 @@ class Registros extends React.Component {
         <div className="table-responsive">
           <>
             <Container>
-              
+
               <div className="date-picker-container">
-                    <div className="refresh">{"⟳"}</div>
+                <div className="refresh">{"⟳"}</div>
 
-                    <div className="date-picker">    
-                    FROM :
-                    <div>
+                <div className="date-picker">
+                  FROM :
+                  <div>
                     <input type="date" id="start" name="date-start"
-                     min="2020-01-01" max="2021-12-31">
+                      min="2020-01-01" max="2021-12-31">
 
-                     </input>
-                     </div>
+                    </input>
+                  </div>
 
-                      TO :  
+                  TO :
 
-                      <div>
-                     <input type="date" id="end" name="date-start"
-                     min="2020-01-01" max="2021-12-31">
-                     </input>
-                     </div>
-                     </div>
+                  <div>
+                    <input type="date" id="end" name="date-start"
+                      min="2020-01-01" max="2021-12-31">
+                    </input>
+                  </div>
+                </div>
 
-                    <div style={{display: "flex", "flex-direction" : "row",width : "55%"}}>
-                    
-                     <Button color="success" onClick={() => this.mostrarModalInsertar()}>Ingresar registro</Button>
-                    </div>
-                     
+                <div style={{ display: "flex", "flex-direction": "row", width: "55%" }}>
 
-                    </div>
+                  <Button color="success" onClick={() => this.mostrarModalInsertar()}>Ingresar registro</Button>
+                </div>
+
+
+              </div>
               <Table>
 
                 <thead>
@@ -205,11 +214,11 @@ class Registros extends React.Component {
                       <td>{dato.id}</td>
                       <td>{dato.title}</td>
                       <td>{dato.details}</td>
-                      <td className={dato.title==="Venta"? "income" : "expense"}>
-                       {dato.title==="Venta"?dato.amount : (-1*dato.amount)}
-                       </td>
-                      <td className="check"> {dato.confirmed? "✓" : ""}</td>
-                      
+                      <td className={dato.title === "Venta" ? "income" : "expense"}>
+                        {dato.title === "Venta" ? dato.amount : (-1 * dato.amount)}
+                      </td>
+                      <td className="check"> {dato.confirmed ? "✓" : ""}</td>
+
                       <td>{dato.creation_date}</td>
                       <td>
                         <Button
@@ -232,16 +241,16 @@ class Registros extends React.Component {
               </ModalHeader>
 
               <ModalBody>
-                
+
 
                 <FormGroup>
                   <label className="bold">
                     Tipo:
                   </label>
                   <div>
-                    <input type="radio" id="Venta" value="Venta" name="title" onChange={this.handleChange}/> 
-                    Venta <br/>
-                    <input type="radio" id="Gasto" value="Gasto" name="title" onChange={this.handleChange}/>
+                    <input type="radio" id="Venta" value="Venta" name="title" onChange={this.handleChange} />
+                    Venta <br />
+                    <input type="radio" id="Gasto" value="Gasto" name="title" onChange={this.handleChange} />
                     Gasto
                   </div>
                 </FormGroup>
@@ -276,15 +285,15 @@ class Registros extends React.Component {
                   <label className="bold">
                     Fecha:
                   </label>
-                  <input 
-                  className="form-control"
-                  type="date" id="start" name="creation_date"
-                  min="2020-01-01" max="2021-12-31"
-                  onChange={this.handleChange}
-                  value={this.state.form.creation_date}
+                  <input
+                    className="form-control"
+                    type="date" id="start" name="creation_date"
+                    min="2020-01-01" max="2021-12-31"
+                    onChange={this.handleChange}
+                    value={this.state.form.creation_date}
                   />
-                  
-                  
+
+
                 </FormGroup>
               </ModalBody>
 
@@ -316,15 +325,15 @@ class Registros extends React.Component {
                   <label className="bold">
                     Tipo:
                   </label>
-                 
+
 
                   <div>
-                    <input type="radio" id="Venta" value="Venta" name="title" onChange={this.handleChange}/> 
-                    Venta <br/>
-                    <input type="radio" id="Gasto" value="Gasto" name="title" onChange={this.handleChange}/>
+                    <input type="radio" id="Venta" value="Venta" name="title" onChange={this.handleChange} />
+                    Venta <br />
+                    <input type="radio" id="Gasto" value="Gasto" name="title" onChange={this.handleChange} />
                     Gasto
                   </div>
-                  <br/>
+                  <br />
 
                 </FormGroup>
 
@@ -341,7 +350,7 @@ class Registros extends React.Component {
                   />
                 </FormGroup>
 
-                
+
 
                 <FormGroup>
                   <label className="bold">
@@ -359,11 +368,11 @@ class Registros extends React.Component {
                   <label className="bold">
                     Fecha:
                   </label>
-                  <input 
-                  className="form-control"
-                  type="date" id="start" name="creation_date"
-                  min="2020-01-01" max="2021-12-31"
-                  onChange={this.handleChange}
+                  <input
+                    className="form-control"
+                    type="date" id="start" name="creation_date"
+                    min="2020-01-01" max="2021-12-31"
+                    onChange={this.handleChange}
                   >
                   </input>
 
@@ -380,6 +389,127 @@ class Registros extends React.Component {
                 <Button
                   className="btn btn-danger"
                   onClick={() => this.cerrarModalInsertar()}
+                >
+                  Cancelar
+                </Button>
+              </ModalFooter>
+            </Modal>
+          </>
+        </div>
+        <div className="table-responsive">
+          <>
+            <Container>
+
+              <div className="date-picker-container">
+
+                <div style={{ display: "flex", "flex-direction": "row", width: "55%" }}>
+
+                  <Button color="success" onClick={() => this.mostrarModalInsertars()}>Ingresar saldo conciliado</Button>
+                </div>
+
+
+              </div>
+              <Table>
+
+                <thead>
+                  <tr>
+                    <th>Saldo total</th>
+                    <th>Saldo conciliado</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {this.state.transactions.map((dato) => (
+                    <tr key={dato.id}>
+                      <td>{dato.title}</td>
+                      <td>{dato.details}</td>
+                      <td className={dato.title === "Venta" ? "income" : "expense"}>
+                        {dato.title === "Venta" ? dato.amount : (-1 * dato.amount)}
+                      </td>
+                      <td className="check"> {dato.confirmed ? "✓" : ""}</td>
+
+                      <td>{dato.creation_date}</td>
+                      <td>
+                        <Button
+                          color="primary"
+                          onClick={() => this.mostrarModalActualizar(dato)}
+                        >
+                          ✎
+                        </Button>{" "}
+                        <Button color="danger" onClick={() => this.eliminar(dato)}> X </Button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </Container>
+
+            <Modal isOpen={this.state.modalActualizar}>
+              <ModalHeader>
+                <div><h3>Editar Registro   {this.state.form.id} </h3></div>
+              </ModalHeader>
+
+              <ModalBody>
+                <FormGroup>
+                  <label className="bold">
+                    Saldo conciliado:
+                  </label>
+                  <input
+                    className="form-control"
+                    name="details"
+                    type="text"
+                    onChange={this.handleChange}
+                    value={this.state.form.details}
+                  />
+                </FormGroup>
+              </ModalBody>
+
+              <ModalFooter>
+                <Button
+                  color="primary"
+                  onClick={() => this.editar(this.state.form)}
+                >
+                  Editar
+                </Button>
+                <Button
+                  color="danger"
+                  onClick={() => this.cerrarModalActualizar()}
+                >
+                  Cancelar
+                </Button>
+              </ModalFooter>
+            </Modal>
+
+
+
+            <Modal isOpen={this.state.modalInsertars}>
+              <ModalHeader>
+                <div><h3>Insertar saldo conciliado</h3></div>
+              </ModalHeader>
+
+              <ModalBody>
+                <FormGroup>
+                  <label className="bold">
+                    Saldo conciliado:
+                  </label>
+                  <input
+                    className="form-control"
+                    name="details"
+                    type="text"
+                    onChange={this.handleChange}
+                  />
+                </FormGroup>
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  color="primary"
+                  onClick={() => this.insertar()}
+                >
+                  Insertar
+                </Button>
+                <Button
+                  className="btn btn-danger"
+                  onClick={() => this.cerrarModalInsertars()}
                 >
                   Cancelar
                 </Button>
