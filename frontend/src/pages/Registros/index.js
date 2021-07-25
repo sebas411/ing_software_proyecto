@@ -33,7 +33,8 @@ class Registros extends React.Component {
       confirmed: "false",
       amount: "",
       title: "",
-      details: ""
+      details: "",
+      subtitle : ""
     },
   };
 
@@ -98,9 +99,11 @@ class Registros extends React.Component {
     arreglo.forEach((registro) => {
       if (dato.id === registro.id) {
         arreglo[contador].title = dato.title;
+        arreglo[contador].subtitle = dato.subtitle;
         arreglo[contador].details = dato.details;
         arreglo[contador].amount = dato.amount;
         arreglo[contador].creation_date = dato.creation_date;
+
       }
 
       contador++;
@@ -163,6 +166,7 @@ class Registros extends React.Component {
     return (
       <div className="Registros">
         <Navbar />
+
         <div className="table-responsive">
           <>
             <Container>
@@ -201,6 +205,7 @@ class Registros extends React.Component {
                   <tr>
                     <th>ID</th>
                     <th>Tipo</th>
+                    <th>Subtitulo</th>
                     <th>Detalles</th>
                     <th>Cantidad</th>
                     <th>Revisado</th>
@@ -213,6 +218,7 @@ class Registros extends React.Component {
                     <tr key={dato.id}>
                       <td>{dato.id}</td>
                       <td>{dato.title}</td>
+                      <td> {dato.subtitle}</td>
                       <td>{dato.details}</td>
                       <td className={dato.title === "Venta" ? "income" : "expense"}>
                         {dato.title === "Venta" ? dato.amount : (-1 * dato.amount)}
@@ -254,6 +260,20 @@ class Registros extends React.Component {
                     Gasto
                   </div>
                 </FormGroup>
+
+                <FormGroup>
+                  <label className="bold">
+                    Subtitulo:
+                  </label>
+                  <input
+                    className="form-control"
+                    name="subtitle"
+                    type="text"
+                    onChange={this.handleChange}
+                    value={this.state.form.subtitle}
+                  />
+                </FormGroup>
+
 
                 <FormGroup>
                   <label className="bold">
@@ -337,10 +357,23 @@ class Registros extends React.Component {
 
                 </FormGroup>
 
+                
+                <FormGroup>
+                  <label className="bold">
+                    Subtitulo:
+                  </label>
+                  <input
+                    className="form-control"
+                    name="subtitle"
+                    type="text"
+                    onChange={this.handleChange}
+                  />
+                </FormGroup>
+
 
                 <FormGroup>
                   <label className="bold">
-                    Titulo:
+                    Detalles:
                   </label>
                   <input
                     className="form-control"
@@ -349,6 +382,8 @@ class Registros extends React.Component {
                     onChange={this.handleChange}
                   />
                 </FormGroup>
+
+                
 
 
 
@@ -396,6 +431,9 @@ class Registros extends React.Component {
             </Modal>
           </>
         </div>
+
+        
+
         <div className="table-responsive">
           <>
             <Container>
@@ -444,43 +482,10 @@ class Registros extends React.Component {
               </Table>
             </Container>
 
-            <Modal isOpen={this.state.modalActualizar}>
-              <ModalHeader>
-                <div><h3>Editar Registro   {this.state.form.id} </h3></div>
-              </ModalHeader>
 
-              <ModalBody>
-                <FormGroup>
-                  <label className="bold">
-                    Saldo conciliado:
-                  </label>
-                  <input
-                    className="form-control"
-                    name="details"
-                    type="text"
-                    onChange={this.handleChange}
-                    value={this.state.form.details}
-                  />
-                </FormGroup>
-              </ModalBody>
-
-              <ModalFooter>
-                <Button
-                  color="primary"
-                  onClick={() => this.editar(this.state.form)}
-                >
-                  Editar
-                </Button>
-                <Button
-                  color="danger"
-                  onClick={() => this.cerrarModalActualizar()}
-                >
-                  Cancelar
-                </Button>
-              </ModalFooter>
-            </Modal>
-
-
+            
+            
+           
 
             <Modal isOpen={this.state.modalInsertars}>
               <ModalHeader>

@@ -8,6 +8,7 @@ from django.http import JsonResponse
 from .serializers import TransactionSerializer 
 from .models import Transaction
 
+from django.db import connection
 
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
@@ -24,6 +25,19 @@ def transactionList(request):
 	transactions= Transaction.objects.all().order_by('-creation_date')
 	serializer = TransactionSerializer(transactions, many=True)
 	return Response(serializer.data)
+
+@api_view(['GET'])
+def getReports(request):
+	querry = "select title, subtitle , sum(amount) as amount from transactions group by title, subtitle"
+	cursor = connection.cursor()
+	cursor.execute(querry)
+	data = cursor.fetchall()
+	valores = []
+	for elemento in data:
+		diction = {"title": elemento[0], "subtitle":elemento[1], "amount": elemento[2]}
+		valores.append(diction)
+		
+	return  Response(valores)
 
 
 

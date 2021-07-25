@@ -50,14 +50,14 @@ const useStyles = makeStyles({
 });
 
 
-const apiURL= 'http://127.0.0.1:8000/reports/' ;
+const apiURL= 'http://127.0.0.1:8000/transactions/' ;
 
 export default function Reportes() {
   const classes = useStyles();
   const [rows, setRows] = useState([])
 
   useEffect(() => {
-    axios.get(apiURL).then(res => {
+    axios.get(apiURL+"reports/").then(res => {
       setRows(res.data)
       console.log('res ===', res)
     })
@@ -101,19 +101,18 @@ export default function Reportes() {
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell align="center">Ingresos</StyledTableCell>
-            <StyledTableCell align="right">Egresos</StyledTableCell>
+            <StyledTableCell align="center">Titulo</StyledTableCell>
+            <StyledTableCell align="right">Subtitulo</StyledTableCell>
+            <StyledTableCell align="right">Cantidad</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <StyledTableRow key={row.id}>
-              <StyledTableCell component="th" scope="row">
-                {row.id}
-              </StyledTableCell>
+              
               <StyledTableCell align="center">{row.title}</StyledTableCell>
-              <StyledTableCell align="right">{row.details}</StyledTableCell>
-                 
+              <StyledTableCell align="right">{row.subtitle}</StyledTableCell>
+             
               <StyledTableCell  align="right" className={true? "income" : "expense"}>
               {row.title=="Venta"?row.amount : (-1*row.amount)}
               </StyledTableCell>
