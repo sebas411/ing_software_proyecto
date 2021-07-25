@@ -356,8 +356,6 @@ class Registros extends React.Component {
                   <br />
 
                 </FormGroup>
-
-                
                 <FormGroup>
                   <label className="bold">
                     Subtitulo:
@@ -434,94 +432,7 @@ class Registros extends React.Component {
 
         
 
-        <div className="table-responsive">
-          <>
-            <Container>
-
-              <div className="date-picker-container">
-
-                <div style={{ display: "flex", "flex-direction": "row", width: "55%" }}>
-
-                  <Button color="success" onClick={() => this.mostrarModalInsertars()}>Ingresar saldo conciliado</Button>
-                </div>
-
-
-              </div>
-              <Table>
-
-                <thead>
-                  <tr>
-                    <th>Saldo total</th>
-                    <th>Saldo conciliado</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {this.state.transactions.map((dato) => (
-                    <tr key={dato.id}>
-                      <td>{dato.title}</td>
-                      <td>{dato.details}</td>
-                      <td className={dato.title === "Venta" ? "income" : "expense"}>
-                        {dato.title === "Venta" ? dato.amount : (-1 * dato.amount)}
-                      </td>
-                      <td className="check"> {dato.confirmed ? "✓" : ""}</td>
-
-                      <td>{dato.creation_date}</td>
-                      <td>
-                        <Button
-                          color="primary"
-                          onClick={() => this.mostrarModalActualizar(dato)}
-                        >
-                          ✎
-                        </Button>{" "}
-                        <Button color="danger" onClick={() => this.eliminar(dato)}> X </Button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </Container>
-
-
-            
-            
-           
-
-            <Modal isOpen={this.state.modalInsertars}>
-              <ModalHeader>
-                <div><h3>Insertar saldo conciliado</h3></div>
-              </ModalHeader>
-
-              <ModalBody>
-                <FormGroup>
-                  <label className="bold">
-                    Saldo conciliado:
-                  </label>
-                  <input
-                    className="form-control"
-                    name="details"
-                    type="text"
-                    onChange={this.handleChange}
-                  />
-                </FormGroup>
-              </ModalBody>
-              <ModalFooter>
-                <Button
-                  color="primary"
-                  onClick={() => this.insertar()}
-                >
-                  Insertar
-                </Button>
-                <Button
-                  className="btn btn-danger"
-                  onClick={() => this.cerrarModalInsertars()}
-                >
-                  Cancelar
-                </Button>
-              </ModalFooter>
-            </Modal>
-          </>
-        </div>
+        
       </div>
 
 

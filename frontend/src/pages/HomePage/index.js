@@ -30,7 +30,7 @@ const HomePage = () => {
     const { push } = useHistory()
 
     return (
-        <Container>
+        
             <div className="login-wrapper">
                 <h1>Textiles La Roca S.A.</h1>
                 <label>
@@ -38,13 +38,13 @@ const HomePage = () => {
                     <input type="text" name="username" placeholder ="Ingresa tu usuario" />
                 </label>
                 <label>
-                    <p>Contraseña</p>
+                    <p >Contraseña</p>
                     <input type="password" name="password" placeholder ="Ingresa tu contraseña" />
                 </label>
                     <button onClick={() => push('./registros')}>Ingresar</button>
                      
             </div>
-        </Container>
+        
     );
 }
 
