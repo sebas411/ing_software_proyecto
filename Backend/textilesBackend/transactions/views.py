@@ -28,7 +28,7 @@ def transactionList(request):
 
 @api_view(['GET'])
 def getReports(request):
-	querry = "select title, subtitle , sum(amount) as amount from transactions group by title, subtitle"
+	querry = "select title, subtitle , sum(amount) as amount from transactions group by title, subtitle order by title, amount"
 	cursor = connection.cursor()
 	cursor.execute(querry)
 	data = cursor.fetchall()
