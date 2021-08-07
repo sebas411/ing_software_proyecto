@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router'
 import HomePage from '../pages/HomePage'
-import Registros from '../pages/Registros'
+import Registros2 from '../pages/Registros2'
 import DataTable from '../pages/Datos'
 import Reportes from '../pages/Reportes'
 
@@ -14,7 +14,7 @@ const Router = () => {
         </Route> 
 
         <Route exact path="/registros">
-            <Registros />
+            <Registros2 />
         </Route>
 
         <Route exact path="/datos">
