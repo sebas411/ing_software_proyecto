@@ -21,6 +21,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import axios from 'axios'
 import Alert from '@material-ui/lab/Alert';
+import Navbar from '../../components/Navbar';
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -186,7 +187,8 @@ function Registros2() {
   }
 
 
-  return (
+  return (<>
+    <Navbar />
     <div className="Registros2">
       
       <Grid container spacing={1}>
@@ -226,7 +228,7 @@ function Registros2() {
           <Grid item xs={3}></Grid>
         </Grid>
     </div>
-  );
+  </>);
 }
 
 export default Registros2;
