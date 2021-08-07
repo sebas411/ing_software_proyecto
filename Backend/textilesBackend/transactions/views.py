@@ -41,6 +41,38 @@ def getReports(request):
 
 
 
+	querry = "select title, subtitle , sum(amount) as amount from transactions where creation_date between '2020-01-01' and '2021-09-05' group by title, subtitle order by title, amount"
+
+
+@api_view(['GET'])
+def getTransactionsByRange(request,start,end):
+	querry = "select * from transactions where creation_date between '"+ start+"' and '"+end+"' order by creation_date desc"
+	cursor = connection.cursor()
+	cursor.execute(querry)
+	data = cursor.fetchall()
+	valores = []
+	for elemento in data:
+		diction = {"id": elemento[0], "creation_date":elemento[1], "confirmed": elemento[2] ,"amount": elemento[3],"title": elemento[4],"details": elemento[5],"subtitle": elemento[6] }
+		valores.append(diction)
+		
+	return  Response(valores)
+
+@api_view(['GET'])
+def getReportsByRange(request,start,end):
+	querry = "select title, subtitle , sum(amount) as amount from transactions where creation_date between '"+start+"' and '"+end+"' group by title, subtitle order by title, amount"
+	cursor = connection.cursor()
+	cursor.execute(querry)
+	data = cursor.fetchall()
+	valores = []
+	for elemento in data:
+		diction = {"title":elemento[0], "subtitle": elemento[1] ,"amount": elemento[2]}
+		valores.append(diction)
+		
+	return  Response(valores)
+
+
+
+
 @api_view(['POST'])
 def transactionCreate(request):
 	serializer = TransactionSerializer(data=request.data)
