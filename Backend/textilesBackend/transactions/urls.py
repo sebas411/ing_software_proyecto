@@ -11,7 +11,10 @@ urlpatterns =[
 	path('logout/',views.userLogout,name='logout'),
 	path('register/',views.userRegister,name='register'),
 	path('reports/',views.getReports,name='reports'),
-	path('ByRange/<str:start>/<str:end>',views.getReportsByRange,name="transaction-by-range"),
+	path('ReportsByRange/<str:start>/<str:end>',views.getReportsByRange,name="reports-by-range"),
+	path('ByRange/<str:start>/<str:end>', views.getTransactionsByRange, name='transactions-by-range')
+
+	
 
 	
 
