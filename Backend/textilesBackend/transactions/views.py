@@ -39,6 +39,20 @@ def getReports(request):
 		
 	return  Response(valores)
 
+@api_view(['GET'])
+def getReportsByRange(request,start,end):
+	querry = "select * from transactions where creation_date between '"+ start+"' and '"+end+"' order by creation_date desc"
+	cursor = connection.cursor()
+	cursor.execute(querry)
+	data = cursor.fetchall()
+	valores = []
+	for elemento in data:
+		diction = {"id": elemento[0], "creation_date":elemento[1], "confirmed": elemento[2] ,"amount": elemento[3],"title": elemento[4],"details": elemento[5],"subtitle": elemento[6] }
+		valores.append(diction)
+		
+	return  Response(valores)
+
+
 
 
 @api_view(['POST'])
