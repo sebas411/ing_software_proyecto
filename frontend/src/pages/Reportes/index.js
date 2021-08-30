@@ -112,7 +112,7 @@ export default function Reportes() {
               <StyledTableCell align="center">{row.title}</StyledTableCell>
               <StyledTableCell align="right">{row.subtitle}</StyledTableCell>
               <StyledTableCell  align="right" className={true? "income" : "expense"}>
-              {row.title=="Venta"?row.amount : (-1*row.amount)}
+              {row.title==="Venta"?row.amount : (-1*row.amount)}
               </StyledTableCell>
               
             </StyledTableRow>
