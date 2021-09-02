@@ -4,6 +4,7 @@ import HomePage from '../pages/HomePage'
 import Registros2 from '../pages/Registros2'
 import DataTable from '../pages/Datos'
 import Reportes from '../pages/Reportes'
+import Registros from '../pages/Registros'
 
 const Router = () => {
 
@@ -23,6 +24,10 @@ const Router = () => {
 
         <Route exact path="/reportes">
             <Reportes />
+        </Route>
+
+        <Route exact path="/registros1">
+            <Registros />
         </Route>
 
     </Switch>)
