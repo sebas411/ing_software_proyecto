@@ -1,0 +1,85 @@
+body{
+    background-color:linear-gradient(90deg, rgba(9,69,140,1) 0%,  rgb(0, 57, 68) 100%);
+}
+.navbar{
+    background-color: gray;
+    display: flex;
+    flex-direction: row;
+    /* padding: 15px; */
+}
+
+.item{
+    color: white;
+    font-size: 30px;
+    margin: 25px;
+    transition: 0.5s;
+    text-align: center;
+    justify-content: center;
+    
+    
+}
+.item:hover{
+    font-size: 35px;
+    cursor: pointer;
+
+}
+.transaction{
+    display: flex;
+    flex-direction: row;
+    padding: 25px;
+    border: 1px solid grey;
+    width: 100%;
+}
+.transaction_header{
+    display: flex;
+    flex-direction: row;
+    padding: 25px;
+    background-color: rgb(38, 38, 102);
+    color: white;
+    width: 100%;
+
+}
+.transaction_item{
+    width: 15%;
+    justify-content:center; 
+    text-align:center;
+    
+    
+}
+.totals{
+    padding: 25px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+.date_picker{
+    margin: 25px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+.form{
+    justify-content: center;
+    
+}
+.report{
+    display: flex;
+    flex-direction: row;
+    padding: 25px;
+    border: 1px solid grey;
+    width: 50%;
+
+}
+.report_item{
+    width: 33%;
+    justify-content:center; 
+    text-align:center;
+
+}
+.report_header{
+    display: flex;
+    flex-direction: row;
+    padding: 25px;
+    background-color: rgb(38, 38, 102);
+    color: white;
+    width: 50%;
+
+}
