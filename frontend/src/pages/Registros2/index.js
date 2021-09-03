@@ -44,20 +44,26 @@ const tableIcons = {
 };
 
 const api = axios.create({
-  baseURL: `url`
+  baseURL: `http://127.0.0.1:8000/transactions/`
 })
 
 
+
+const apiURL = 'http://127.0.0.1:8000/transactions/';
 function Registros2() {
 
   var columns = [
-    {title: "id", field: "id", hidden: true},
-    {title: "Tipo", field: "tipo"},
-    {title: "Subtitulo", field: "subtitulo"},
-    {title: "Detalles", field: "detalles"},
-    {title: "Cantidad", field: "cantidad"},
-    {title: "Revisado", field: "revisado"},
-    {title: "Fecha", field: "fecha"}
+    { title: "id", field: "id", hidden: true },
+    { title: "Tipo", field: "title", editable: 'never' },
+    { title: "Subtitulo", field: "subtitle",  editable: 'never' },
+    { title: "Detalles", field: "details",  editable: 'never' },
+    { title: "Cantidad", field: "amount",  editable: 'never' },
+    {
+      title: "Revisado", field: "confirmed",
+      render: rowData => rowData.confirmed === "true" || rowData.confirmed === true ? <Check /> : <Clear />,
+      lookup: { 'true': <Check />, 'false': <Clear /> }
+    },
+    { title: "Fecha", field: "creation_date",  editable: 'never' }
   ]
   const [data, setData] = useState([]); //table data
 
@@ -65,168 +71,218 @@ function Registros2() {
   const [iserror, setIserror] = useState(false)
   const [errorMessages, setErrorMessages] = useState([])
 
-  useEffect(() => { 
-    api.get("data url")
-        .then(res => {               
-            setData(res.data.data)
-         })
-         .catch(error=>{
-             console.log("Error")
-         })
+  const fetchDetails = async () => {
+    try {
+      const res = await axios.get(apiURL)
+      setData(res.data)
+    } catch (e) {
+      console.log("Error --- ", e)
+    }
+  }
+  useEffect(() => {
+    fetchDetails()
   }, [])
 
-  const handleRowUpdate = (newData, oldData, resolve) => {
+  console.log('the dat ais ====', data)
+
+  const handleRowUpdate = async (newData, oldData, resolve) => {
     //validation
     let errorList = []
-    if(newData.tipo === ""){
+    if (newData.tipo === "") {
       errorList.push("Por favor, ingrese un dato valido")
     }
-    if(newData.subtitulo === ""){
+    if (newData.subtitulo === "") {
       errorList.push("Por favor, ingrese un dato valido")
     }
-    if(newData.detalles === ""){
+    if (newData.detalles === "") {
       errorList.push("Por favor, ingrese un dato valido")
     }
-    if(newData.cantidad === ""){
+    if (newData.cantidad === "") {
       errorList.push("Por favor, ingrese un dato valido")
     }
-    if(newData.revisado === ""){
+    if (newData.revisado === "") {
       errorList.push("Por favor, ingrese un dato valido")
     }
-    if(newData.fecha === ""){
+    if (newData.fecha === "") {
       errorList.push("Por favor, ingrese un dato valido")
     }
 
-    if(errorList.length < 1){
-      api.patch("url"+newData.id, newData)
-      .then(res => {
-        const dataUpdate = [...data];
-        const index = oldData.tableData.id;
-        dataUpdate[index] = newData;
-        setData([...dataUpdate]);
+    if (errorList.length < 1) {
+      try {
+        const res = await axios.post(apiURL + `update/${oldData.id}`, newData);
+        const index = data.findIndex(item => item.id === oldData.id)
+        const updatedData = [...data]
+        updatedData[index] = res.data
+        setData(updatedData)
+
         resolve()
         setIserror(false)
         setErrorMessages([])
-      })
-      .catch(error => {
+      } catch (e) {
         setErrorMessages(["La carga falló, error del servidor"])
         setIserror(true)
         resolve()
-        
-      })
-    }else{
+      }
+
+      /* api.patch("url" + newData.id, newData)
+         .then(res => {
+           const dataUpdate = [...data];
+           const index = oldData.tableData.id;
+           dataUpdate[index] = newData;
+           setData([...dataUpdate]);
+           resolve()
+           setIserror(false)
+           setErrorMessages([])
+         })
+         .catch(error => {
+           setErrorMessages(["La carga falló, error del servidor"])
+           setIserror(true)
+           resolve()
+ 
+         })*/
+    } else {
       setErrorMessages(errorList)
       setIserror(true)
       resolve()
 
     }
-    
+
   }
 
-  const handleRowAdd = (newData, resolve) => {
+
+  const handleRowAdd = async (newData, resolve) => {
     //validation
     let errorList = []
-    if(newData.tipo === undefined){
+    if (newData.title === undefined) {
       errorList.push("Ingrese datos")
     }
-    if(newData.subtitulo === undefined){
+    if (newData.subtitle === undefined) {
       errorList.push("Ingrese  subtitulo")
     }
-    if(newData.detalles === undefined){
+    if (newData.details === undefined) {
       errorList.push("Ingrese detalles")
     }
-    if(newData.cantidad === undefined){
+    if (newData.amount === undefined) {
       errorList.push("Ingrese cantidad")
     }
-    if(newData.revisado === undefined){
+    if (newData.confirmed === undefined) {
       errorList.push("Ingrese si se ha revisado")
     }
-    if(newData.fecha === undefined){
+    if (newData.creation_date === undefined) {
       errorList.push("Ingrese fecha")
     }
 
-    if(errorList.length < 1){ //no error
-      api.post("url", newData)
-      .then(res => {
-        let dataToAdd = [...data];
-        dataToAdd.push(newData);
-        setData(dataToAdd);
-        resolve()
+    if (errorList.length < 1) { //no error
+      try {
+
+        const res = await api.post(apiURL + "create/", newData)
+        setData(data.concat(res.data));
         setErrorMessages([])
-        setIserror(false)
-      })
-      .catch(error => {
-        setErrorMessages(["No se pueden agregar datos, error del servidor"])
-        setIserror(true)
         resolve()
-      })
-    }else{
+      } catch (e) {
+        setErrorMessages(["No se pueden agregar datos, error del servidor"])
+        console.log('eerr ---', e)
+        resolve()
+      }
+
+      /*api.post("url", newData)
+        .then(res => {
+          let dataToAdd = [...data];
+          dataToAdd.push(newData);
+          setData(dataToAdd);
+          resolve()
+          setErrorMessages([])
+          setIserror(false)
+        })
+        .catch(error => {
+          setErrorMessages(["No se pueden agregar datos, error del servidor"])
+          setIserror(true)
+          resolve()
+        })*/
+    } else {
       setErrorMessages(errorList)
       setIserror(true)
       resolve()
     }
 
-    
+
   }
 
-  const handleRowDelete = (oldData, resolve) => {
-    
-    api.delete("url"+oldData.id)
-      .then(res => {
-        const dataDelete = [...data];
-        const index = oldData.tableData.id;
-        dataDelete.splice(index, 1);
-        setData([...dataDelete]);
-        resolve()
-      })
-      .catch(error => {
-        setErrorMessages(["La eliminación falló, error del servvidor"])
-        setIserror(true)
-        resolve()
-      })
+  const handleRowDelete = async (oldData, resolve) => {
+    try {
+      await axios.delete(apiURL + `delete/${oldData.id}`);
+
+      const dataDelete = [...data];
+      const index = dataDelete.findIndex(item => item.id === oldData.id)
+      dataDelete.splice(index, 1);
+      setData([...dataDelete]);
+      setErrorMessages([])
+      setIserror(false)
+      resolve()
+    } catch (e) {
+      setErrorMessages(["La eliminación falló, error del servvidor"])
+      setIserror(true)
+      resolve()
+    }
+
+    /* api.delete("url" + oldData.id)
+       .then(res => {
+         const dataDelete = [...data];
+         const index = oldData.tableData.id;
+         dataDelete.splice(index, 1);
+         setData([...dataDelete]);
+         resolve()
+       })
+       .catch(error => {
+         setErrorMessages(["La eliminación falló, error del servvidor"])
+         setIserror(true)
+         resolve()
+       })*/
   }
 
 
   return (<>
     <Navbar />
     <div className="Registros2">
-      
+
       <Grid container spacing={1}>
-          <Grid item xs={3}></Grid>
-          <Grid item xs={6}>
+        <Grid item xs={3}></Grid>
+        <Grid item xs={6}>
           <div>
-            {iserror && 
+            {iserror &&
               <Alert severity="error">
-                  {errorMessages.map((msg, i) => {
-                      return <div key={i}>{msg}</div>
-                  })}
+                {errorMessages.map((msg, i) => {
+                  return <div key={i}>{msg}</div>
+                })}
               </Alert>
-            }       
+            }
           </div>
-            <MaterialTable
-              title="Registros"
-              columns={columns}
-              data={data}
-              icons={tableIcons}
-              editable={{
-                onRowUpdate: (newData, oldData) =>
-                  new Promise((resolve) => {
-                      handleRowUpdate(newData, oldData, resolve);
-                      
-                  }),
-                onRowAdd: (newData) =>
-                  new Promise((resolve) => {
-                    handleRowAdd(newData, resolve)
-                  }),
-                onRowDelete: (oldData) =>
-                  new Promise((resolve) => {
-                    handleRowDelete(oldData, resolve)
-                  }),
-              }}
-            />
-          </Grid>
-          <Grid item xs={3}></Grid>
+          <MaterialTable
+            title="Registros"
+            columns={columns}
+            data={data}
+            icons={tableIcons}
+            editable={{
+              onRowUpdate: (newData, oldData) =>
+                new Promise((resolve) => {
+                  handleRowUpdate(newData, oldData, resolve);
+
+                }),
+              onRowAdd: (newData) => {
+                console.log('the new data is ======', newData)
+                return new Promise((resolve) => {
+                  handleRowAdd(newData, resolve)
+                })
+              },
+              onRowDelete: (oldData) =>
+                new Promise((resolve) => {
+                  handleRowDelete(oldData, resolve)
+                }),
+            }}
+          />
         </Grid>
+        <Grid item xs={3}></Grid>
+      </Grid>
     </div>
   </>);
 }
