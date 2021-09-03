@@ -1,12 +1,12 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import Providers from './Providers';
 import Router from './router'
 
 
 const App = () => {
-  return <BrowserRouter>
+  return <Providers>
       <Router />
-  </BrowserRouter>
+      </Providers>
 }
 
 export default App;

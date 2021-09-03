@@ -13,7 +13,7 @@ import "../Registros/Registros.css";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: '#1a237e',
+    backgroundColor: theme.palette.primary.main,
     color: theme.palette.common.white,
   },
   body: {
