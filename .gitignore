@@ -2,3 +2,4 @@ node_modules
 dist
 frontend/node_modules
 frontend_con_vue/node_modules
+venv

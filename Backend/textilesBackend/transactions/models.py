@@ -16,3 +16,6 @@ class Transaction(models.Model):
 	details = models.CharField(max_length=300)
 	class Meta:
             db_table = 'transactions'
+
+	def __str__(self):
+		return self.title + ' de ' + self.subtitle + ': Q.' + str(self.amount)
