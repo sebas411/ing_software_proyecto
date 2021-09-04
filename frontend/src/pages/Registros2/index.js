@@ -22,11 +22,7 @@ import ViewColumn from '@material-ui/icons/ViewColumn';
 import axios from 'axios'
 import Alert from '@material-ui/lab/Alert';
 import Navbar from '../../components/Navbar';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
   Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -55,18 +51,24 @@ const api = axios.create({
 
 const apiURL = 'http://127.0.0.1:8000/transactions/';
 function Registros2() {
+
   var columns = [
     { title: "id", field: "id", hidden: true },
-    { title: "Tipo", field: "title"},
+    { title: "Tipo", field: "title",
+      lookup: {'income': 'Venta', 'expense': 'Gasto'}
+  },
     { title: "Categoría", field: "subtitle" },
     { title: "Detalles", field: "details" },
-    { title: "Monto", field: "amount"},
+    { title: "Monto", field: "amount",
+      render: rowData => rowData.title === "income" ? rowData.amount : (-1 * rowData.amount)
+  },
     {
       title: "Conciliado", field: "confirmed",
       render: rowData => rowData.confirmed === "true" || rowData.confirmed === true ? <Check /> : <Clear />,
       lookup: { 'true': <Check />, 'false': <Clear /> }
     },
-    { title: "Fecha", field: "creation_date"}
+    { title: "Fecha", field: "creation_date"
+  }
   ]
   const [data, setData] = useState([]); //table data
 
