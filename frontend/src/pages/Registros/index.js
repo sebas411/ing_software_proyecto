@@ -205,10 +205,10 @@ class Registros extends React.Component {
                   <tr>
                     <th>ID</th>
                     <th>Tipo</th>
-                    <th>Subtitulo</th>
+                    <th>Categoria</th>
                     <th>Detalles</th>
-                    <th>Cantidad</th>
-                    <th>Revisado</th>
+                    <th>Monto</th>
+                    <th>Conciliado</th>
                     <th>Fecha</th>
                   </tr>
                 </thead>
@@ -263,7 +263,7 @@ class Registros extends React.Component {
 
                 <FormGroup>
                   <label className="bold">
-                    Subtitulo:
+                    Categoría:
                   </label>
                   <input
                     className="form-control"
@@ -290,7 +290,7 @@ class Registros extends React.Component {
 
                 <FormGroup>
                   <label className="bold">
-                    Cantidad:
+                    Monto:
                   </label>
                   <input
                     className="form-control"
@@ -358,7 +358,7 @@ class Registros extends React.Component {
                 </FormGroup>
                 <FormGroup>
                   <label className="bold">
-                    Subtitulo:
+                    Categoría:
                   </label>
                   <input
                     className="form-control"
@@ -387,7 +387,7 @@ class Registros extends React.Component {
 
                 <FormGroup>
                   <label className="bold">
-                    Cantidad:
+                    Monto:
                   </label>
                   <input
                     className="form-control"

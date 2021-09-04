@@ -55,6 +55,15 @@ const apiURL= 'http://127.0.0.1:8000/transactions/' ;
 export default function Reportes() {
   const classes = useStyles();
   const [rows, setRows] = useState([])
+  const [start, setStart] = useState('')
+  const [end, setEnd] = useState('')
+
+  const onRefresh = () => {
+    axios.get(apiURL + `reports_by_range/${start}/${end}/`).then(res => {
+      setRows(res.data)
+      console.log('res ===', res)
+    })
+  }
 
   useEffect(() => {
     axios.get(apiURL+"reports/").then(res => {
@@ -69,13 +78,13 @@ export default function Reportes() {
   return (<>
     <Navbar />
     <div className="date-picker-container">
-      <div className="refresh">{"⟳"}</div>
+      <div className="refresh" onClick={onRefresh}>{"⟳"}</div>
 
       <div className="date-picker">    
       from :
       <div>
       <input type="date" id="start" name="date-start"
-       min="2020-01-01" max="2021-12-31">
+       min="2020-01-01" max="2021-12-31" onChange={event => setStart(event.target.value)}>
 
        </input>
        </div>
@@ -84,7 +93,7 @@ export default function Reportes() {
 
         <div>
        <input type="date" id="end" name="date-start"
-       min="2020-01-01" max="2021-12-31">
+       min="2020-01-01" max="2021-12-31" onChange={event => setEnd(event.target.value)}>
        </input>
        </div>
        </div>
@@ -101,9 +110,9 @@ export default function Reportes() {
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell align="center">Titulo</StyledTableCell>
-            <StyledTableCell align="right">Subtitulo</StyledTableCell>
-            <StyledTableCell align="right">Cantidad</StyledTableCell>
+            <StyledTableCell align="center">Tipo</StyledTableCell>
+            <StyledTableCell align="right">Categoría</StyledTableCell>
+            <StyledTableCell align="right">Monto</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>

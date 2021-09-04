@@ -58,11 +58,11 @@ function Registros2() {
   var columns = [
     { title: "id", field: "id", hidden: true },
     { title: "Tipo", field: "title"},
-    { title: "Subtitulo", field: "subtitle" },
+    { title: "Categoría", field: "subtitle" },
     { title: "Detalles", field: "details" },
-    { title: "Cantidad", field: "amount"},
+    { title: "Monto", field: "amount"},
     {
-      title: "Revisado", field: "confirmed",
+      title: "Conciliado", field: "confirmed",
       render: rowData => rowData.confirmed === "true" || rowData.confirmed === true ? <Check /> : <Clear />,
       lookup: { 'true': <Check />, 'false': <Clear /> }
     },
