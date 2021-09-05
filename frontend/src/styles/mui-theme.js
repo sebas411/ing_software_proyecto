@@ -13,7 +13,7 @@ const MUI_THEME = {
         },
         primary: {
             light: "white",
-            main: "#7986cb",
+            main: "#1a237e",
             dark: "rgb(6, 38, 88)",
             contrastText: "#fff"
         },

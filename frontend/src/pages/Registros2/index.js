@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { forwardRef } from 'react';
 import Grid from '@material-ui/core/Grid'
-
+import { makeStyles } from '@material-ui/core/styles';
 import MaterialTable from "../../components/material-table";
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -22,7 +22,7 @@ import ViewColumn from '@material-ui/icons/ViewColumn';
 import axios from 'axios'
 import Alert from '@material-ui/lab/Alert';
 import Navbar from '../../components/Navbar';
-import DateFnsUtils from '@date-io/date-fns';
+import SpaceBox from '../../components/SpaceBox';
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
   Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -47,10 +47,22 @@ const api = axios.create({
   baseURL: `http://127.0.0.1:8000/transactions/`
 })
 
-
+const useStyles = makeStyles((theme) => ({
+  root: {
+      backgroundPosition: 'center',
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      backgroundColor: theme.palette.primary.dark,
+      padding: '100px',
+      margin: '0px',
+      display: 'flex'
+  }
+}))
 
 const apiURL = 'http://127.0.0.1:8000/transactions/';
 function Registros2() {
+
+  const classes = useStyles()
 
   var columns = [
     { title: "id", field: "id", hidden: true },
@@ -247,12 +259,13 @@ function Registros2() {
 
 
   return (<>
-    <Navbar />
+    <Navbar/>
+    <Grid container direction='column'  className={classes.root}>
+    <SpaceBox top={3}>
     <div className="Registros2">
-
       <Grid container spacing={1}>
         <Grid item xs={3}></Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
           <div>
             {iserror &&
               <Alert severity="error">
@@ -289,6 +302,8 @@ function Registros2() {
         <Grid item xs={3}></Grid>
       </Grid>
     </div>
+    </SpaceBox>
+    </Grid>
   </>);
 }
 
