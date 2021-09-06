@@ -83,3 +83,13 @@ body{
     width: 50%;
 
 }
+.login{
+    background-color:rgb(31, 54, 75) ;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    height: 1000px;
+    padding: 200px;
+    vertical-align: center;
+
+}

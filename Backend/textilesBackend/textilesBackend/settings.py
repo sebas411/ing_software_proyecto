@@ -99,7 +99,7 @@ DATABASES = {
 
         'USER': 'postgres',
 
-        'PASSWORD': '2561',
+        'PASSWORD': 'postgres',
 
         'HOST': 'localhost',
 
@@ -149,9 +149,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ORIGIN_WHITELIST = [
 "http://localhost:3000",
+"http://localhost:8080"
 
 ]

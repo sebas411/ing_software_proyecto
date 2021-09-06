@@ -11,9 +11,12 @@ export default new Vuex.Store(
             transactions : [],
             reports : [],
             selectedTab : 0,
-            navbarItems : ["Home","Add register","History","Reports","Settings"],
+            navbarItems : ["Login","Add register","History","Reports","Settings"],
             total : null,
             subtotal : null,
+            isUserAuthenticated : false,
+            isUserAdmin : false
+            
 
         },
         mutations : {
@@ -30,6 +33,11 @@ export default new Vuex.Store(
             },
             selectTab(state,index){
                 state.selectedTab= index
+            },
+            logout(state){
+                state.isUserAuthenticated = false
+                state.selectedTab= 0
+
             },
             calculateTotal(state){
                 var total =0
@@ -154,6 +162,9 @@ export default new Vuex.Store(
             },
             getReportsByRangeAction(context,dates){
                 context.commit('getReportsByRange',dates)
+            },
+            logoutAction(context){
+                context.commit('logout')
             }
 
         }
