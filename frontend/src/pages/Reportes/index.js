@@ -120,8 +120,8 @@ export default function Reportes() {
             <StyledTableRow key={row.id}>
               <StyledTableCell align="center">{row.title}</StyledTableCell>
               <StyledTableCell align="right">{row.subtitle}</StyledTableCell>
-              <StyledTableCell  align="right" className={true? "income" : "expense"}>
-              {row.title==="Venta"?row.amount : (-1*row.amount)}
+              <StyledTableCell  align="right" className={true? "Venta" : "Gasto"}>
+              {row.title==="income"?row.amount : (-1*row.amount)}
               </StyledTableCell>
               
             </StyledTableRow>

@@ -125,8 +125,8 @@ export default function DataTable() {
               <StyledTableCell align="center">{row.title}</StyledTableCell>
               <StyledTableCell align="right">{row.details}</StyledTableCell>
                  
-              <StyledTableCell  align="right" className={true? "income" : "expense"}>
-              {row.title==="Venta"?row.amount : (-1*row.amount)}
+              <StyledTableCell  align="right" className={true? "Venta" : "Gasto"}>
+              {row.title==="income"?row.amount : (-1*row.amount)}
               </StyledTableCell>
               <StyledTableCell align="right">{row.creation_date}</StyledTableCell>
             </StyledTableRow>
