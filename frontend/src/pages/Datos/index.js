@@ -80,7 +80,7 @@ export default function DataTable() {
     <div className="date-picker-container">
       <div className="refresh" onClick={onRefresh}>{"⟳"}</div>
       <div className="date-picker">    
-      FROM :
+      from :
       <div>
       <input type="date" id="start" name="date-start"
        min="2020-01-01" max="2021-12-31" onChange={event => setStart(event.target.value)}>
@@ -88,7 +88,7 @@ export default function DataTable() {
        </input>
        </div>
 
-        TO :  
+        to :  
 
         <div>
        <input type="date" id="end" name="date-start"

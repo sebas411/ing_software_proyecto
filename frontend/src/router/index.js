@@ -5,6 +5,7 @@ import Registros2 from '../pages/Registros2'
 import DataTable from '../pages/Datos'
 import Reportes from '../pages/Reportes'
 import Registros from '../pages/Registros'
+import Chart from '../pages/Chart'
 
 const Router = () => {
 
@@ -28,6 +29,9 @@ const Router = () => {
 
         <Route exact path="/registros1">
             <Registros />
+        </Route>
+        <Route exact path="/grafica">
+            <Chart />
         </Route>
 
     </Switch>)

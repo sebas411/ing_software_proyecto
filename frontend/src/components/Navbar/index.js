@@ -70,6 +70,12 @@ const Navbar = () => {
                                 <Grid item>
                                     <ListItem button className={clsx({
                                         [classes.buttonbar]: true,
+                                        [classes.buttonActive]: location.pathname === '/grafica'
+                                    })} onClick={() => push('/grafica')}>Gráfica</ListItem>
+                                </Grid>
+                                <Grid item>
+                                    <ListItem button className={clsx({
+                                        [classes.buttonbar]: true,
                                         [classes.buttonActive]: location.pathname === '/'
                                     })} onClick={() => push('/')}>Salir</ListItem>
                                 </Grid>
