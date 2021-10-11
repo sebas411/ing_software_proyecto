@@ -79,7 +79,7 @@ const HomePage = () => {
                     </Grid>
                     <Grid item xs={12}>
                     <SpaceBox top={6}>
-                    <TextField label="Contraseña" variant="standard" className={classes.textf}/>
+                    <TextField label="Contraseña" variant="standard" hintText='Password' type='password' className={classes.textf}/>
                     </SpaceBox>
                     </Grid>
                     <Grid item xs={12}>
