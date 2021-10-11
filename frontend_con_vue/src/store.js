@@ -86,7 +86,7 @@ export default new Vuex.Store(
 
             },
             getTransactionsByRange(state,dates){
-                var url ="http://127.0.0.1:8000/transactions/ByRange/"+ dates[0] + "/"+dates[1]
+                var url ="http://127.0.0.1:8000/transactions/by_range/"+ dates[0] + "/"+dates[1]
                 axios.get(url).then(function(response){
                     state.transactions= response.data
                 })
@@ -112,7 +112,7 @@ export default new Vuex.Store(
 
             },
             getReportsByRange(state,dates){
-                var url ="http://127.0.0.1:8000/transactions/ReportsByRange/"+dates[0]+"/"+dates[1]
+                var url ="http://127.0.0.1:8000/transactions/reports_by_range/"+dates[0]+"/"+dates[1]
                 axios.get(url).then(function(response){
                     state.reports = response.data
 
