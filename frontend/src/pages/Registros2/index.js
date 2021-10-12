@@ -23,6 +23,9 @@ import axios from 'axios'
 import Alert from '@material-ui/lab/Alert';
 import Navbar from '../../components/Navbar';
 import SpaceBox from '../../components/SpaceBox';
+import TableFooter from "@material-ui/core/TableFooter"
+import TableRow from "@material-ui/core/TableRow"
+import TableCell from "@material-ui/core/TableCell"
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
   Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -49,13 +52,16 @@ const api = axios.create({
 
 const useStyles = makeStyles((theme) => ({
   root: {
-      backgroundPosition: 'center',
-      backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat',
-      backgroundColor: theme.palette.primary.dark,
-      padding: '100px',
-      margin: '0px',
-      display: 'flex'
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundColor: theme.palette.primary.dark,
+    padding: '100px',
+    margin: '0px',
+    display: 'flex'
+  },
+  cells: {
+    backgroundColor: 'white'
   }
 }))
 
@@ -66,21 +72,24 @@ function Registros2() {
 
   var columns = [
     { title: "id", field: "id", hidden: true },
-    { title: "Tipo", field: "title",
-      lookup: {'income': 'Venta', 'expense': 'Gasto'}
-  },
+    {
+      title: "Tipo", field: "title",
+      lookup: { 'income': 'Venta', 'expense': 'Gasto' }
+    },
     { title: "Categoría", field: "subtitle" },
     { title: "Detalles", field: "details" },
-    { title: "Monto", field: "amount",
+    {
+      title: "Monto", field: "amount",
       render: rowData => rowData.title === "income" ? rowData.amount : (-1 * rowData.amount)
-  },
+    },
     {
       title: "Conciliado", field: "confirmed",
       render: rowData => rowData.confirmed === "true" || rowData.confirmed === true ? <Check /> : <Clear />,
       lookup: { 'true': <Check />, 'false': <Clear /> }
     },
-    { title: "Fecha", field: "creation_date"
-  }
+    {
+      title: "Fecha", field: "creation_date"
+    }
   ]
   const [data, setData] = useState([]); //table data
 
@@ -228,14 +237,16 @@ function Registros2() {
   }
 
   const sumdata = data.map(data => data.amount).reduce((acc, data) => data + acc, 0);
-  console.log(sumdata)
+
+  const sumdata2 = sumdata.toFixed(2);
 
   const truedata = Object.values(data).filter(data => data.confirmed === true)
-console.log(truedata) 
-
-  const sumtruedata = truedata.map(truedata => truedata.amount).reduce((acc, truedata) => truedata + acc, 0)
-  console.log(sumtruedata)
   
+  const sumtruedata = truedata.map(truedata => truedata.amount).reduce((acc, truedata) => truedata + acc, 0)
+
+  const sumtruedata2 = sumtruedata.toFixed(2);
+
+
 
   const handleRowDelete = async (oldData, resolve) => {
     try {
@@ -271,48 +282,56 @@ console.log(truedata)
 
 
   return (<>
-    <Navbar/>
-    <Grid container direction='column'  className={classes.root}>
-    <SpaceBox top={3}>
-    <div className="Registros2">
-      <Grid container spacing={1}>
-        <Grid item xs={6} sm={12}>
-          <div>
-            {iserror &&
-              <Alert severity="error">
-                {errorMessages.map((msg, i) => {
-                  return <div key={i}>{msg}</div>
-                })}
-              </Alert>
-            }
-          </div>
-          <MaterialTable
-            title="Registros"
-            columns={columns}
-            data={data}
-            icons={tableIcons}
-            editable={{
-              onRowUpdate: (newData, oldData) =>
-                new Promise((resolve) => {
-                  handleRowUpdate(newData, oldData, resolve);
+    <Navbar />
+    <Grid container direction='column' className={classes.root}>
+      <SpaceBox top={3}>
+        <div className="Registros2">
+          <Grid container spacing={1}>
+            <Grid item xs={6} sm={12}>
+              <div>
+                {iserror &&
+                  <Alert severity="error">
+                    {errorMessages.map((msg, i) => {
+                      return <div key={i}>{msg}</div>
+                    })}
+                  </Alert>
+                }
+              </div>
+              <MaterialTable
+                title="Registros"
+                columns={columns}
+                data={data}
+                icons={tableIcons}
+                editable={{
+                  onRowUpdate: (newData, oldData) =>
+                    new Promise((resolve) => {
+                      handleRowUpdate(newData, oldData, resolve);
 
-                }),
-              onRowAdd: (newData) => {
-                console.log('the new data is ======', newData)
-                return new Promise((resolve) => {
-                  handleRowAdd(newData, resolve)
-                })
-              },
-              onRowDelete: (oldData) =>
-                new Promise((resolve) => {
-                  handleRowDelete(oldData, resolve)
-                }),
-            }}
-          />
-        </Grid>
-      </Grid>
-    </div>
-    </SpaceBox>
+                    }),
+                  onRowAdd: (newData) => {
+                    console.log('the new data is ======', newData)
+                    return new Promise((resolve) => {
+                      handleRowAdd(newData, resolve)
+                    })
+                  },
+                  onRowDelete: (oldData) =>
+                    new Promise((resolve) => {
+                      handleRowDelete(oldData, resolve)
+                    }),
+                }}
+              />
+              <TableFooter>
+                <TableRow>
+                  <TableCell colSpan={2} className={classes.cells}/>
+                  <TableCell colSpan={2} className={classes.cells}>Total: {'Q'+sumdata2}</TableCell>
+                  <TableCell colSpan={2} className={classes.cells}/>
+                  <TableCell colSpan={2} className={classes.cells}>Total Conciliado: {'Q'+sumtruedata2}</TableCell>
+                </TableRow>
+              </TableFooter>
+            </Grid>
+          </Grid>
+        </div>
+      </SpaceBox>
     </Grid>
   </>);
 }
