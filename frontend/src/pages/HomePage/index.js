@@ -64,25 +64,26 @@ const HomePage = () => {
 
         <Grid container direction='column' justify={'center'} alignItems={'center'} alignContent={'center'} className={classes.root1}>
             <SpaceBox top={24}>
+                <Grid item xs={8} sm={12}>
             <Card className={classes.root}>
                 <CardContent>
                     <Grid container direction='column' justify={'center'} alignItems={'center'} alignContent={'center'}>
-                    <Grid item xs={12}>
+                    <Grid item xs={6} sm={12}>
                         <SpaceBox top={6}>
                         <Typography> <img src={Logo} alt='logo' className={classes.logo} /></Typography>
                         </SpaceBox>
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={6} sm={12}>
                     <SpaceBox top={6}>
                     <TextField label="Usuario" variant="standard" className={classes.textf}/>
                     </SpaceBox>
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={6} sm={12}>
                     <SpaceBox top={6}>
                     <TextField label="Contraseña" variant="standard" hintText='Password' type='password' className={classes.textf}/>
                     </SpaceBox>
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={6} sm={12}>
                     <SpaceBox top={6}>
                     <Button variant='contained' onClick={() => push('./registros')} color='primary'>
                                 Ingresar
@@ -92,6 +93,7 @@ const HomePage = () => {
                     </Grid>
                 </CardContent>
             </ Card>
+            </Grid>
             </SpaceBox>
 
         </Grid>

@@ -88,6 +88,8 @@ function Registros2() {
   const [iserror, setIserror] = useState(false)
   const [errorMessages, setErrorMessages] = useState([])
 
+
+
   const fetchDetails = async () => {
     try {
       const res = await axios.get(apiURL)
@@ -225,6 +227,16 @@ function Registros2() {
 
   }
 
+  const sumdata = data.map(data => data.amount).reduce((acc, data) => data + acc, 0);
+  console.log(sumdata)
+
+  const truedata = Object.values(data).filter(data => data.confirmed === true)
+console.log(truedata) 
+
+  const sumtruedata = truedata.map(truedata => truedata.amount).reduce((acc, truedata) => truedata + acc, 0)
+  console.log(sumtruedata)
+  
+
   const handleRowDelete = async (oldData, resolve) => {
     try {
       await axios.delete(apiURL + `delete/${oldData.id}`);
@@ -264,8 +276,7 @@ function Registros2() {
     <SpaceBox top={3}>
     <div className="Registros2">
       <Grid container spacing={1}>
-        <Grid item xs={3}></Grid>
-        <Grid item xs={12}>
+        <Grid item xs={6} sm={12}>
           <div>
             {iserror &&
               <Alert severity="error">
@@ -299,7 +310,6 @@ function Registros2() {
             }}
           />
         </Grid>
-        <Grid item xs={3}></Grid>
       </Grid>
     </div>
     </SpaceBox>
