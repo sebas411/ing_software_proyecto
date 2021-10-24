@@ -196,20 +196,6 @@ function Registros2() {
         resolve()
       }
 
-      /*api.post("url", newData)
-        .then(res => {
-          let dataToAdd = [...data];
-          dataToAdd.push(newData);
-          setData(dataToAdd);
-          resolve()
-          setErrorMessages([])
-          setIserror(false)
-        })
-        .catch(error => {
-          setErrorMessages(["No se pueden agregar datos, error del servidor"])
-          setIserror(true)
-          resolve()
-        })*/
     } else {
       setErrorMessages(errorList)
       setIserror(true)
