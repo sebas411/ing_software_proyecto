@@ -111,7 +111,6 @@ function Registros2() {
     fetchDetails()
   }, [])
 
-  console.log('the dat ais ====', data)
 
   const handleRowUpdate = async (newData, oldData, resolve) => {
     //validation
