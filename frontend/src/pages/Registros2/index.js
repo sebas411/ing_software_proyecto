@@ -233,19 +233,6 @@ function Registros2() {
       resolve()
     }
 
-    /* api.delete("url" + oldData.id)
-       .then(res => {
-         const dataDelete = [...data];
-         const index = oldData.tableData.id;
-         dataDelete.splice(index, 1);
-         setData([...dataDelete]);
-         resolve()
-       })
-       .catch(error => {
-         setErrorMessages(["La eliminación falló, error del servvidor"])
-         setIserror(true)
-         resolve()
-       })*/
   }
 
 
