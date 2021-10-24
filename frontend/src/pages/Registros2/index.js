@@ -151,22 +151,6 @@ function Registros2() {
         resolve()
       }
 
-      /* api.patch("url" + newData.id, newData)
-         .then(res => {
-           const dataUpdate = [...data];
-           const index = oldData.tableData.id;
-           dataUpdate[index] = newData;
-           setData([...dataUpdate]);
-           resolve()
-           setIserror(false)
-           setErrorMessages([])
-         })
-         .catch(error => {
-           setErrorMessages(["La carga falló, error del servidor"])
-           setIserror(true)
-           resolve()
- 
-         })*/
     } else {
       setErrorMessages(errorList)
       setIserror(true)
@@ -212,20 +196,6 @@ function Registros2() {
         resolve()
       }
 
-      /*api.post("url", newData)
-        .then(res => {
-          let dataToAdd = [...data];
-          dataToAdd.push(newData);
-          setData(dataToAdd);
-          resolve()
-          setErrorMessages([])
-          setIserror(false)
-        })
-        .catch(error => {
-          setErrorMessages(["No se pueden agregar datos, error del servidor"])
-          setIserror(true)
-          resolve()
-        })*/
     } else {
       setErrorMessages(errorList)
       setIserror(true)
@@ -263,19 +233,6 @@ function Registros2() {
       resolve()
     }
 
-    /* api.delete("url" + oldData.id)
-       .then(res => {
-         const dataDelete = [...data];
-         const index = oldData.tableData.id;
-         dataDelete.splice(index, 1);
-         setData([...dataDelete]);
-         resolve()
-       })
-       .catch(error => {
-         setErrorMessages(["La eliminación falló, error del servvidor"])
-         setIserror(true)
-         resolve()
-       })*/
   }
 
 
