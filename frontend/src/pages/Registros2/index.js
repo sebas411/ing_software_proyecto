@@ -151,22 +151,6 @@ function Registros2() {
         resolve()
       }
 
-      /* api.patch("url" + newData.id, newData)
-         .then(res => {
-           const dataUpdate = [...data];
-           const index = oldData.tableData.id;
-           dataUpdate[index] = newData;
-           setData([...dataUpdate]);
-           resolve()
-           setIserror(false)
-           setErrorMessages([])
-         })
-         .catch(error => {
-           setErrorMessages(["La carga falló, error del servidor"])
-           setIserror(true)
-           resolve()
- 
-         })*/
     } else {
       setErrorMessages(errorList)
       setIserror(true)
