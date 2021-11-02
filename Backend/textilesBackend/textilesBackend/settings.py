@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'iflt00i2$g&7&i+kn3ng0wdun%3m*gse&c#f^at7bz%gzxprf0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://textileslaroca.herokuapp.com/','textileslaroca.herokuapp.com']
 
 
 # Application definition
@@ -56,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'textilesBackend.urls'
@@ -149,12 +151,35 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CORS_ALLOW_ALL_ORIGINS: True
+#CORS_ALLOW_ALL_ORIGINS: True
 
 # CORS_ORIGIN_WHITELIST = [*]
 
-# CORS_ORIGIN_WHITELIST = [
-# "http://localhost:3000",
-# "http://localhost:8080"
+CORS_ORIGIN_WHITELIST = [
+ "http://localhost:3000",
+ "http://localhost:8080"
 
-# ]
+ ]
+
+
+
+
+ # Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.11/howto/static-files/
+PROJECT_ROOT   =   os.path.join(os.path.abspath(__file__))
+STATIC_ROOT  =   os.path.join(PROJECT_ROOT, 'staticfiles')
+STATIC_URL = '/static/'
+
+# Extra lookup directories for collectstatic to find static files
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)
+
+#  Add configuration for static files storage using whitenoise
+#STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+import dj_database_url 
+prod_db  =  dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(prod_db)

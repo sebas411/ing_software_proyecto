@@ -111,7 +111,6 @@ function Registros2() {
     fetchDetails()
   }, [])
 
-  console.log('the dat ais ====', data)
 
   const handleRowUpdate = async (newData, oldData, resolve) => {
     //validation
@@ -152,22 +151,6 @@ function Registros2() {
         resolve()
       }
 
-      /* api.patch("url" + newData.id, newData)
-         .then(res => {
-           const dataUpdate = [...data];
-           const index = oldData.tableData.id;
-           dataUpdate[index] = newData;
-           setData([...dataUpdate]);
-           resolve()
-           setIserror(false)
-           setErrorMessages([])
-         })
-         .catch(error => {
-           setErrorMessages(["La carga falló, error del servidor"])
-           setIserror(true)
-           resolve()
- 
-         })*/
     } else {
       setErrorMessages(errorList)
       setIserror(true)
@@ -213,20 +196,6 @@ function Registros2() {
         resolve()
       }
 
-      /*api.post("url", newData)
-        .then(res => {
-          let dataToAdd = [...data];
-          dataToAdd.push(newData);
-          setData(dataToAdd);
-          resolve()
-          setErrorMessages([])
-          setIserror(false)
-        })
-        .catch(error => {
-          setErrorMessages(["No se pueden agregar datos, error del servidor"])
-          setIserror(true)
-          resolve()
-        })*/
     } else {
       setErrorMessages(errorList)
       setIserror(true)
@@ -236,15 +205,14 @@ function Registros2() {
 
   }
 
-  const sumdata = data.map(data => data.amount).reduce((acc, data) => data + acc, 0);
+  const sumdata = data.map(data => data.amount).reduce((acc, data) => data.tipo==="Venta"?data + acc :data-acc, 0);
 
-  const sumdata2 = sumdata.toFixed(2);
 
   const truedata = Object.values(data).filter(data => data.confirmed === true)
   
-  const sumtruedata = truedata.map(truedata => truedata.amount).reduce((acc, truedata) => truedata + acc, 0)
+  const sumtruedata = truedata.map(truedata => truedata.amount).reduce((acc, truedata) => truedata.tipo==="Venta"?truedata + acc :truedata-acc, 0)
 
-  const sumtruedata2 = sumtruedata.toFixed(2);
+ 
 
 
 
@@ -323,9 +291,9 @@ function Registros2() {
               <TableFooter>
                 <TableRow>
                   <TableCell colSpan={2} className={classes.cells}/>
-                  <TableCell colSpan={2} className={classes.cells}>Total: {'Q'+sumdata2}</TableCell>
+                  <TableCell colSpan={2} className={classes.cells}>Total: {'Q'+sumdata}</TableCell>
                   <TableCell colSpan={2} className={classes.cells}/>
-                  <TableCell colSpan={2} className={classes.cells}>Total Conciliado: {'Q'+sumtruedata2}</TableCell>
+                  <TableCell colSpan={2} className={classes.cells}>Total Conciliado: {'Q'+sumtruedata}</TableCell>
                 </TableRow>
               </TableFooter>
             </Grid>
