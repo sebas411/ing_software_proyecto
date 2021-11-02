@@ -47,7 +47,7 @@ const tableIcons = {
 };
 
 const api = axios.create({
-  baseURL: `http://127.0.0.1:8000/transactions/`
+  baseURL: `https://textileslaroca.herokuapp.com/`
 })
 
 const useStyles = makeStyles((theme) => ({
@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const apiURL = 'http://127.0.0.1:8000/transactions/';
+const apiURL = 'https://textileslaroca.herokuapp.com/';
 function Registros2() {
 
   const classes = useStyles()

@@ -50,7 +50,7 @@ const useStyles = makeStyles({
 });
 
 
-const apiURL= 'http://127.0.0.1:8000/transactions/' ;
+const apiURL= 'https://textileslaroca.herokuapp.com/' ;
 
 export default function Reportes() {
   const classes = useStyles();

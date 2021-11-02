@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import {Bar} from 'react-chartjs-2'
 import Navbar from '../../components/Navbar';
 
-const apiURL= 'http://127.0.0.1:8000/transactions/' ;
+const apiURL= 'https://textileslaroca.herokuapp.com/' ;
 
 const DynamicChart = () => {
     const [chartData, setChartData]  = useState({});
