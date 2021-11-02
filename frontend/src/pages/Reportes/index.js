@@ -9,7 +9,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Navbar from '../../components/Navbar';
 import axios from 'axios'
-import "../Registros/Registros.css";
+import '../Registros2/Registros.css'
+
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -59,14 +60,14 @@ export default function Reportes() {
   const [end, setEnd] = useState('')
 
   const onRefresh = () => {
-    axios.get(apiURL + `reports_by_range/${start}/${end}/`).then(res => {
+    axios.get(apiURL + `transactions/reports_by_range/${start}/${end}/`).then(res => {
       setRows(res.data)
       console.log('res ===', res)
     })
   }
 
   useEffect(() => {
-    axios.get(apiURL+"reports/").then(res => {
+    axios.get(apiURL+"transactions/reports").then(res => {
       setRows(res.data)
       console.log('res ===', res)
     })

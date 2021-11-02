@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import './Registros.css'
 import { forwardRef } from 'react';
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles';
@@ -101,7 +102,7 @@ function Registros2() {
 
   const fetchDetails = async () => {
     try {
-      const res = await axios.get(apiURL)
+      const res = await axios.get(apiURL + "transactions/")
       setData(res.data)
     } catch (e) {
       console.log("Error --- ", e)
@@ -136,7 +137,7 @@ function Registros2() {
 
     if (errorList.length < 1) {
       try {
-        const res = await axios.post(apiURL + `update/${oldData.id}`, newData);
+        const res = await axios.post(apiURL + `transactions/update/${oldData.id}`, newData);
         const index = data.findIndex(item => item.id === oldData.id)
         const updatedData = [...data]
         updatedData[index] = res.data
@@ -186,7 +187,7 @@ function Registros2() {
     if (errorList.length < 1) { //no error
       try {
 
-        const res = await api.post(apiURL + "create/", newData)
+        const res = await api.post(apiURL + "transactions/create/", newData)
         setData(data.concat(res.data));
         setErrorMessages([])
         resolve()
@@ -218,7 +219,7 @@ function Registros2() {
 
   const handleRowDelete = async (oldData, resolve) => {
     try {
-      await axios.delete(apiURL + `delete/${oldData.id}`);
+      await axios.delete(apiURL + `transactions/delete/${oldData.id}`);
 
       const dataDelete = [...data];
       const index = dataDelete.findIndex(item => item.id === oldData.id)

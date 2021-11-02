@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import {Bar} from 'react-chartjs-2'
 import Navbar from '../../components/Navbar';
-
 const apiURL= 'https://textileslaroca.herokuapp.com/' ;
 
 const DynamicChart = () => {
@@ -11,7 +10,7 @@ const DynamicChart = () => {
         let Amount = [];
         let Title = [];
 
-        axios.get(apiURL+"reports/")
+        axios.get(apiURL+"transactions/reports/")
         .then(res => {
             console.log(res);
             for(const dataObj of res.data){
