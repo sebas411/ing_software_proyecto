@@ -1,25 +1,11 @@
-name: "Snyk"
-description: "Check your Node application for vulnerabilties using Snyk"
-author: "Gareth Rushgrove"
-branding:
-  icon: "alert-triangle"
-  color: "yellow"
-inputs:
-  command:
-    description: "Which Snyk command to run, defaults to test"
-    default: test
-  args:
-    description: "Additional arguments to pass to Snyk"
-  json:
-    description: "Output a snyk.json file with results if running the test command"
-    default: false
-runs:
-  using: "docker"
-  image: "docker://snyk/snyk:node"
-  env:
-    SNYK_INTEGRATION_NAME: GITHUB_ACTIONS
-    SNYK_INTEGRATION_VERSION: node
-  args:
-  - snyk
-  - ${{ inputs.command }}
-  - ${{ inputs.args }} 
+name: Example workflow for Node using Snyk
+on: push
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
