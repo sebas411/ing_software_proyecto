@@ -27,6 +27,7 @@ import SpaceBox from '../../components/SpaceBox';
 import TableFooter from "@material-ui/core/TableFooter"
 import TableRow from "@material-ui/core/TableRow"
 import TableCell from "@material-ui/core/TableCell"
+
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
   Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -97,7 +98,6 @@ function Registros2() {
   //for error handling
   const [iserror, setIserror] = useState(false)
   const [errorMessages, setErrorMessages] = useState([])
-
 
 
   const fetchDetails = async () => {
@@ -248,6 +248,23 @@ function Registros2() {
          resolve()
        })*/
   }
+
+  /*const handleRowReverse = async (valueData, resolve) => {
+    //validation
+      try {
+
+        const res = await api.post(apiURL + "transactions/create/", valueData)
+        const inversa = Math.abs(res.data.amount) * -1
+        setData(data.concat(inversa));
+        setErrorMessages([])
+        resolve()
+      } catch (e) {
+        setErrorMessages(["No se pueden agregar datos, error del servidor"])
+        console.log('err ---', e)
+        resolve()
+      }
+
+  }*/
 
 
   return (<>

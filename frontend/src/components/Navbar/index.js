@@ -53,25 +53,25 @@ const Navbar = () => {
                                     <ListItem button className={clsx({
                                         [classes.buttonbar]: true,
                                         [classes.buttonActive]: location.pathname === '/datos'
-                                    })} onClick={() => push('/datos')}>Datos</ListItem>
+                                    })} onClick={() => push('/datos-G4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ')}>Datos</ListItem>
                                 </Grid>
                                 <Grid item>
                                     <ListItem button className={clsx({
                                         [classes.buttonbar]: true,
                                         [classes.buttonActive]: location.pathname === '/registros'
-                                    })} onClick={() => push('/registros')}>Registros</ListItem>
+                                    })} onClick={() => push('/registros-G4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ')}>Registros</ListItem>
                                 </Grid>
                                 <Grid item>
                                     <ListItem button className={clsx({
                                         [classes.buttonbar]: true,
                                         [classes.buttonActive]: location.pathname === '/reportes'
-                                    })} onClick={() => push('/reportes')}>Reportes</ListItem>
+                                    })} onClick={() => push('/reportes-G4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ')}>Reportes</ListItem>
                                 </Grid>
                                 <Grid item>
                                     <ListItem button className={clsx({
                                         [classes.buttonbar]: true,
                                         [classes.buttonActive]: location.pathname === '/grafica'
-                                    })} onClick={() => push('/grafica')}>Gráfica</ListItem>
+                                    })} onClick={() => push('/grafica-G4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ')}>Gráfica</ListItem>
                                 </Grid>
                                 <Grid item>
                                     <ListItem button className={clsx({

@@ -9,6 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Navbar from '../../components/Navbar';
 import axios from 'axios'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import '../Registros2/Registros.css'
 
 
@@ -58,6 +59,8 @@ export default function Reportes() {
   const [rows, setRows] = useState([])
   const [start, setStart] = useState('')
   const [end, setEnd] = useState('')
+  const [loading, setLoading] = useState(false)
+
 
   const onRefresh = () => {
     axios.get(apiURL + `transactions/reports_by_range/${start}/${end}/`).then(res => {
@@ -69,6 +72,7 @@ export default function Reportes() {
   useEffect(() => {
     axios.get(apiURL+"transactions/reports").then(res => {
       setRows(res.data)
+      setLoading(true)
       console.log('res ===', res)
     })
   }, [] )
@@ -117,7 +121,7 @@ export default function Reportes() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {loading ? rows.map((row) => (
             <StyledTableRow key={row.id}>
               <StyledTableCell align="center">{row.title}</StyledTableCell>
               <StyledTableCell align="right">{row.subtitle}</StyledTableCell>
@@ -126,7 +130,7 @@ export default function Reportes() {
               </StyledTableCell>
               
             </StyledTableRow>
-          ))}
+          )):<CircularProgress/>}
         </TableBody>
       </Table>
     </TableContainer>

@@ -14,18 +14,18 @@ const Router = () => {
             <HomePage />
         </Route> 
 
-        <Route exact path="/registros">
+        <Route exact path="/registros-G4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ">
             <Registros2 />
         </Route>
 
-        <Route exact path="/datos">
+        <Route exact path="/datos-G4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ">
             <DataTable />
         </Route>
 
-        <Route exact path="/reportes">
+        <Route exact path="/reportes-G4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ">
             <Reportes />
         </Route>
-        <Route exact path="/grafica">
+        <Route exact path="/grafica-G4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ">
             <Chart />
         </Route>
 

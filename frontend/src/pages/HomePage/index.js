@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import "./style.css"
@@ -41,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
 
 const HomePage = () => {
     const classes = useStyles()
+    const [user, setUser] = useState('')
+    const [password, setPassword] = useState('')
+
     /*
     const [state, setState] = useState({ username: '', password: '' })
 
@@ -58,7 +61,27 @@ const HomePage = () => {
         setState({ ...state, [e.target.name]: e.target.value })
     }*/
 
+    const handleUser = (event) => {
+        setUser(event.target.value)
+        console.log(user)
+    }
+
+    const handlePassword = (event) => {
+        setPassword(event.target.value)
+        console.log(password)
+    }
+
     const { push } = useHistory()
+
+    const hanldeLogin = () => {
+        if (user==='admin' && password==='admin') {
+        push('./registros-G4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ')}
+        else{
+            return false;
+        }
+        
+    }
+
 
     return (
 
@@ -75,17 +98,17 @@ const HomePage = () => {
                     </Grid>
                     <Grid item xs={6} sm={12}>
                     <SpaceBox top={6}>
-                    <TextField label="Usuario" variant="standard" className={classes.textf}/>
+                    <TextField label="Usuario" variant="standard" onChange={handleUser} className={classes.textf}/>
                     </SpaceBox>
                     </Grid>
                     <Grid item xs={6} sm={12}>
                     <SpaceBox top={6}>
-                    <TextField label="Contraseña" variant="standard" hintText='Password' type='password' className={classes.textf}/>
+                    <TextField label="Contraseña" variant="standard" hintText='Password' type='password' onChange={handlePassword} className={classes.textf}/>
                     </SpaceBox>
                     </Grid>
                     <Grid item xs={6} sm={12}>
                     <SpaceBox top={6}>
-                    <Button variant='contained' onClick={() => push('./registros')} color='primary'>
+                    <Button variant='contained' onClick={hanldeLogin} color='primary'>
                                 Ingresar
                         </Button>
                     </SpaceBox>
